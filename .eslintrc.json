@@ -17,13 +17,8 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "react-hooks",
-        "prettier"
-    ],
-     "settings": {
+    "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
+    "settings": {
         "import/resolver": {
             "typescript": {}
         }
@@ -31,13 +26,13 @@
     "rules": {
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
-        "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
+        "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
         "import/extensions": [
             "error",
             "ignorePackages",
             {
-            "ts": "never",
-            "tsx": "never"
+                "ts": "never",
+                "tsx": "never"
             }
         ],
         "no-shadow": "off",
@@ -45,7 +40,7 @@
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {
-            "allowExpressions": true
+                "allowExpressions": true
             }
         ],
         "react-hooks/rules-of-hooks": "error",
@@ -53,6 +48,7 @@
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
         "prettier/prettier": "warn",
-        "react/state-in-constructor": "off"
+        "react/state-in-constructor": "off",
+        "react/require-default-props": "off"
     }
 }

@@ -1,5 +1,4 @@
 {
-"src/**/*.{js,ts,jsx,tsx}": [
-  "npm run lint:fix && npm run format:write"
-  ]
+    "src/**/*.{js,ts,jsx,tsx}": ["eslint --fix"],
+    "*.json": ["prettier --write"]
 }

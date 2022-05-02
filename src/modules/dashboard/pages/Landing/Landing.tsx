@@ -7,7 +7,6 @@ import WeddingKiss from 'assets/img/wedding-kiss.png';
 import styles from 'styles/pages/Landing.module.scss';
 
 function Landing(): JSX.Element {
-    console.log('environment', process.env);
     return (
         <main className={styles['landing-container']}>
             <div className={styles['landing-title-box']}>

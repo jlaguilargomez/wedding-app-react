@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import cn from 'classnames';
 
 import LoginForm from 'modules/login/containers/LoginForm/LoginForm';
@@ -6,17 +6,21 @@ import LoginForm from 'modules/login/containers/LoginForm/LoginForm';
 import styles from 'styles/pages/LoginPage.module.scss';
 import { AuthContext } from 'modules/common/context/Auth/auth.context';
 import { useNavigate } from 'react-router-dom';
+import Loader from 'modules/common/components/Loader/Loader';
 
 function Login(): JSX.Element {
-    console.log('Login');
-    const { isAuthenticated } = useContext(AuthContext);
+    const { loading, isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isAuthenticated) {
             navigate('/');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
+
+    if (loading) {
+        return <Loader show />;
+    }
 
     return (
         <>

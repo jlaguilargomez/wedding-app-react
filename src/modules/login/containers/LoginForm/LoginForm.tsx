@@ -1,12 +1,13 @@
+import React, { FormEvent, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { auth } from 'lib/firebase/firebase.config.js';
+
 import Input from 'modules/common/components/Input/Input';
 import Button from 'modules/common/components/Button/Button';
-import React, { FormEvent, useEffect, useState } from 'react';
-// import toast from 'react-hot-toast';
 
 import styles from 'styles/containers/LoginForm.module.scss';
-import toast from 'react-hot-toast';
-import { auth } from 'lib/firebase/firebase.config.js';
-import { useNavigate, useParams } from 'react-router-dom';
 
 interface LoginForm {
     user: string;
@@ -24,8 +25,6 @@ const defaultUserLoginInfo: IUserLoginInfo = {
 };
 
 function LoginForm(): JSX.Element {
-    console.log('LoginForm');
-
     const [form, setForm] = useState<LoginForm>(defaultUserLoginInfo);
     const { userId } = useParams();
     const navigate = useNavigate();
@@ -34,10 +33,10 @@ function LoginForm(): JSX.Element {
         if (userId) {
             setForm((prevValue) => ({
                 ...prevValue,
-                userId,
+                user: userId,
             }));
         }
-    }, []);
+    }, [userId]);
 
     const handleInput = (name: string, value: string): void => {
         setForm((prevFormValues) => ({ ...prevFormValues, [name]: value }));
@@ -53,9 +52,9 @@ function LoginForm(): JSX.Element {
         await toast.promise(
             auth.signInWithEmailAndPassword(`${user}@bodamaruyjose.com`, pass),
             {
-                loading: 'Saving...',
-                success: <b>Settings saved!</b>,
-                error: <b>Could not save.</b>,
+                loading: 'Comprobando...',
+                success: <b>Usuario correcto</b>,
+                error: <b>Los datos introducidos no son correctos</b>,
             }
         );
 
@@ -72,12 +71,15 @@ function LoginForm(): JSX.Element {
                 labelText="Usuario"
                 name="user"
                 value={form.user}
+                pattern="[a-zA-Z]*"
+                errorMessage="Revisa el nobre de usuario introducido"
                 onChangeEvent={handleInput}
             />
             <Input
                 type="password"
                 labelText="Contraseña"
                 name="pass"
+                pattern="^[a-zA-Z0-9]*"
                 value={form.pass}
                 onChangeEvent={handleInput}
             />

@@ -4,19 +4,16 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyCJQ4hYApUF1-BagDg8ErO814BNPi5x6ZQ',
-    authDomain: 'wedding-app-1b48f.firebaseapp.com',
-    projectId: 'wedding-app-1b48f',
-    storageBucket: 'wedding-app-1b48f.appspot.com',
-    messagingSenderId: '270646758778',
-    appId: '1:270646758778:web:e3262000ae35b456ba9ac3',
-    measurementId: 'G-ZN5S4CXWGD',
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
-console.log('firebaseConfig');
 
 if (!firebase.apps.length) {
-    console.log('initialize app');
-
     firebase.initializeApp(firebaseConfig);
 }
 

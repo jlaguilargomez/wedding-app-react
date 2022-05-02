@@ -5,6 +5,7 @@ import cn from 'classnames';
 import WeddingKiss from 'assets/img/wedding-kiss.png';
 
 import styles from 'styles/pages/Landing.module.scss';
+import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 
 function Landing(): JSX.Element {
     return (
@@ -25,6 +26,8 @@ function Landing(): JSX.Element {
                 src={WeddingKiss}
                 alt="novios"
             />
+
+            <ActionButton />
         </main>
     );
 }

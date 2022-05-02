@@ -1,0 +1,32 @@
+.action-button {
+    align-self: end;
+    border-radius: 100%;
+    background: var(--light-brown);
+    color: var(--big-brown);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 20px;
+    box-shadow: 2px 1px 10px 2px grey;
+    font-size: 3rem;
+    transition: 0.2s all;
+
+    &--next {
+        right: 20px;
+
+        &:active {
+            transform: translateY(2px) scale(0.9);
+            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &--back {
+        left: 20px;
+        transform: rotate(180deg);
+
+        &:active {
+            transform: translateY(2px) rotate(180deg) scale(0.9);
+            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
+        }
+    }
+}

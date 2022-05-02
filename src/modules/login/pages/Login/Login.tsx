@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import LoginForm from 'modules/login/containers/LoginForm/LoginForm';
@@ -8,6 +8,7 @@ import { AuthContext } from 'modules/common/context/Auth/auth.context';
 import { useNavigate } from 'react-router-dom';
 
 function Login(): JSX.Element {
+    console.log('Login');
     const { isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
 

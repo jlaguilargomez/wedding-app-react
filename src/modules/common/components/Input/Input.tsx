@@ -51,7 +51,7 @@ function Input({
                 onChange={handleInput}
                 onBlur={handleInput}
                 required={required}
-                autoComplete="nope"
+                autoComplete="off"
             />
             {pattern && (
                 <span className={cn(styles['error-text'])}>{errorMessage}</span>

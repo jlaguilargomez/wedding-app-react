@@ -21,7 +21,9 @@ function App(): JSX.Element {
                                 </AuthGuard>
                             }
                         />
-                        <Route path="/login" element={<Login />} />
+                        <Route path="login" element={<Login />}>
+                            <Route path=":user" element={<Login />} />
+                        </Route>
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>

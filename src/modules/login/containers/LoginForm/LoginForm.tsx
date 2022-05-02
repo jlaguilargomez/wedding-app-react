@@ -1,31 +1,46 @@
 import Input from 'modules/common/components/Input/Input';
 import Button from 'modules/common/components/Button/Button';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 // import toast from 'react-hot-toast';
 
 import styles from 'styles/containers/LoginForm.module.scss';
 import toast from 'react-hot-toast';
 import { auth } from 'lib/firebase/firebase.config.js';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 interface LoginForm {
     email: string;
     pass: string;
 }
 
-interface LoginFormProps {
-    formValues?: LoginForm;
+// interface LoginFormProps {
+//     formValues: LoginForm;
+// }
+interface IUserLoginInfo {
+    email: string;
+    pass: string;
 }
 
-const deaultFormValues = {
+const defaultUserLoginInfo: IUserLoginInfo = {
     email: '',
     pass: '',
 };
 
-function LoginForm({ formValues }: LoginFormProps): JSX.Element {
-    const [form, setForm] = useState<LoginForm>(formValues || deaultFormValues);
+function LoginForm(): JSX.Element {
+    console.log('LoginForm');
 
+    const [form, setForm] = useState<LoginForm>(defaultUserLoginInfo);
+    const { user } = useParams();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            setForm((prevValue) => ({
+                ...prevValue,
+                email: `${user}@bodamyj.party`,
+            }));
+        }
+    }, []);
 
     const handleInput = (name: string, value: string): void => {
         setForm((prevFormValues) => ({ ...prevFormValues, [name]: value }));
@@ -48,7 +63,11 @@ function LoginForm({ formValues }: LoginFormProps): JSX.Element {
     };
 
     return (
-        <form className={styles['login-form']} onSubmit={handleSubmit}>
+        <form
+            className={styles['login-form']}
+            onSubmit={handleSubmit}
+            autoComplete="off"
+        >
             <Input
                 labelText="Usuario"
                 name="email"

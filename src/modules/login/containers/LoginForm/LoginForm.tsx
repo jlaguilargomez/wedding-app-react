@@ -4,6 +4,8 @@ import React, { FormEvent, useState } from 'react';
 // import toast from 'react-hot-toast';
 
 import styles from 'styles/containers/LoginForm.module.scss';
+import toast from 'react-hot-toast';
+import { auth } from 'lib/firebase/firebase.config.js';
 
 interface LoginForm {
     email: string;
@@ -32,13 +34,13 @@ function LoginForm({ formValues }: LoginFormProps): JSX.Element {
         event.preventDefault();
         console.log('form', form);
 
-        // const { email, pass } = form;
+        const { email, pass } = form;
 
-        // toast.promise(auth.signInWithEmailAndPassword(email, pass), {
-        //     loading: 'Saving...',
-        //     success: <b>Settings saved!</b>,
-        //     error: <b>Could not save.</b>,
-        // });
+        toast.promise(auth.signInWithEmailAndPassword(email, pass), {
+            loading: 'Saving...',
+            success: <b>Settings saved!</b>,
+            error: <b>Could not save.</b>,
+        });
     };
 
     return (

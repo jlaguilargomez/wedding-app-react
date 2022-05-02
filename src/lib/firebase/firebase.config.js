@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCJQ4hYApUF1-BagDg8ErO814BNPi5x6ZQ',
@@ -12,8 +12,11 @@ const firebaseConfig = {
     appId: '1:270646758778:web:e3262000ae35b456ba9ac3',
     measurementId: 'G-ZN5S4CXWGD',
 };
+console.log('firebaseConfig');
 
 if (!firebase.apps.length) {
+    console.log('initialize app');
+
     firebase.initializeApp(firebaseConfig);
 }
 

@@ -22,7 +22,7 @@ function App(): JSX.Element {
                             }
                         />
                         <Route path="login" element={<Login />}>
-                            <Route path=":user" element={<Login />} />
+                            <Route path=":userId" element={<Login />} />
                         </Route>
                         <Route path="*" element={<NotFound />} />
                     </Routes>

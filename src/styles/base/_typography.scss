@@ -1,4 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Dancing+Script:wght@400;500&family=Roboto+Slab:wght@300;400;500&display=swap');
+@font-face {
+    font-family: 'Boogaloo';
+    src: local('Boogaloo'),
+        url('../../assets/fonts/Boogaloo/Boogaloo-Regular.ttf')
+            format('truetype');
+}
+
+@font-face {
+    font-family: 'Dancing Script';
+    src: local('Dancing Script'),
+        url('../../assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf')
+            format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto Slab';
+    src: local('Roboto Slab'),
+        url('../../assets/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf')
+            format('truetype');
+}
+
 html {
     font-size: 10px;
 }

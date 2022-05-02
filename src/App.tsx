@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import NotFound from 'modules/common/containers/NotFound/NotFound';
+import Landing from 'modules/dashboard/pages/Landing/Landing';
+import Login from 'modules/login/pages/Login/Login';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthContextProvider } from 'modules/common/context/Auth/auth.context';
+import { Toaster } from 'react-hot-toast';
+import AuthGuard from 'modules/common/guards/auth.guard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(): JSX.Element {
+    return (
+        <AuthContextProvider>
+            <BrowserRouter>
+                <div className="container">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <AuthGuard>
+                                    <Landing />
+                                </AuthGuard>
+                            }
+                        />
+                        <Route path="login" element={<Login />}>
+                            <Route path=":user" element={<Login />} />
+                        </Route>
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+            <Toaster position="top-center" reverseOrder={false} />
+        </AuthContextProvider>
+    );
 }
 
 export default App;

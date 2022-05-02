@@ -1,0 +1,15 @@
+@import '../abstracts/mixins';
+
+.login-page {
+    margin-top: 10vh;
+    width: 80%;
+    text-align: center;
+
+    @include respond(tablet) {
+        width: 60%;
+    }
+
+    @include respond(desktop) {
+        width: 40%;
+    }
+}

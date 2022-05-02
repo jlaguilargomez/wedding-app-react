@@ -50,7 +50,10 @@ function LoginForm(): JSX.Element {
         const { user, pass } = form;
 
         await toast.promise(
-            auth.signInWithEmailAndPassword(`${user}@bodamaruyjose.com`, pass),
+            auth.signInWithEmailAndPassword(
+                `${user.toLowerCase()}@bodamaruyjose.com`,
+                pass
+            ),
             {
                 loading: 'Comprobando...',
                 success: <b>Usuario correcto</b>,

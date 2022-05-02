@@ -1,7 +1,7 @@
 import React from 'react';
 import NotFound from 'modules/common/containers/NotFound/NotFound';
-import Landing from 'modules/dashboard/containers/Landing/Landing';
-import Login from 'modules/login/containers/Login/Login';
+import Landing from 'modules/dashboard/pages/Landing/Landing';
+import Login from 'modules/login/pages/Login/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App(): JSX.Element {

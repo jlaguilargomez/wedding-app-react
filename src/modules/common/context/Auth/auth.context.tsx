@@ -1,46 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 
-import {
-    ContextProviderProps,
-    ProviderValueState,
-} from 'modules/common/types/Context.types';
+import { ContextProviderProps } from 'modules/common/types/Context.types';
 import { auth } from 'lib/firebase/firebase.config.js';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 
 interface IAuthContext {
-    authData: any;
+    user: any;
+    error: any;
+    loading: boolean;
     isAuthenticated: boolean;
 }
 
-export const AuthContext = createContext<ProviderValueState<IAuthContext>>(
-    {} as ProviderValueState<IAuthContext>
-);
-
-const initialState = {
-    authData: undefined,
-    isAuthenticated: false,
-};
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export function AuthContextProvider({
     children,
 }: ContextProviderProps): JSX.Element {
-    const [state, setState] = useState<any>(initialState);
-    // const [user, setUser] = useState<any>();
+    const [user, setUser] = useState<any>();
     const [error, setError] = useState<any>();
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(getAuth(), setState, setError);
+        const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError);
 
-        // console.log('user', user);
-        console.log('error', error);
-        setState({ authData: auth, isAuthenticated: true });
+        setLoading(false);
+
         return () => unsubscribe();
-    }, [auth]);
+    }, []);
 
     const contextValue = useMemo(
-        () => ({ state, setState }),
-        [state, setState]
+        () => ({ user, error, loading, isAuthenticated: !!user }),
+        [user, error, loading]
     );
 
     return (

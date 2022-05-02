@@ -5,6 +5,7 @@ import Login from 'modules/login/pages/Login/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from 'modules/common/context/Auth/auth.context';
 import { Toaster } from 'react-hot-toast';
+import AuthGuard from 'modules/common/guards/auth.guard';
 
 function App(): JSX.Element {
     return (
@@ -12,7 +13,14 @@ function App(): JSX.Element {
             <BrowserRouter>
                 <div className="container">
                     <Routes>
-                        <Route path="/" element={<Landing />} />
+                        <Route
+                            path="/"
+                            element={
+                                <AuthGuard>
+                                    <Landing />
+                                </AuthGuard>
+                            }
+                        />
                         <Route path="/login" element={<Login />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>

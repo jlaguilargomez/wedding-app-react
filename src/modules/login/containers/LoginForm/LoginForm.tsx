@@ -6,6 +6,7 @@ import React, { FormEvent, useState } from 'react';
 import styles from 'styles/containers/LoginForm.module.scss';
 import toast from 'react-hot-toast';
 import { auth } from 'lib/firebase/firebase.config.js';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface LoginForm {
     email: string;
@@ -24,6 +25,8 @@ const deaultFormValues = {
 function LoginForm({ formValues }: LoginFormProps): JSX.Element {
     const [form, setForm] = useState<LoginForm>(formValues || deaultFormValues);
 
+    const navigate = useNavigate();
+
     const handleInput = (name: string, value: string): void => {
         setForm((prevFormValues) => ({ ...prevFormValues, [name]: value }));
     };
@@ -32,15 +35,16 @@ function LoginForm({ formValues }: LoginFormProps): JSX.Element {
         event: FormEvent<HTMLFormElement>
     ): Promise<void> => {
         event.preventDefault();
-        console.log('form', form);
 
         const { email, pass } = form;
 
-        toast.promise(auth.signInWithEmailAndPassword(email, pass), {
+        await toast.promise(auth.signInWithEmailAndPassword(email, pass), {
             loading: 'Saving...',
             success: <b>Settings saved!</b>,
             error: <b>Could not save.</b>,
         });
+
+        navigate('/');
     };
 
     return (

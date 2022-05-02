@@ -10,7 +10,7 @@
 }
 
 .landing-title-box {
-    width: 90%;
+    width: 100%;
 }
 
 .landing-title {
@@ -30,6 +30,7 @@
 
 .landing-subtitle {
     text-align: right;
+    margin-top: -2rem;
 }
 
 .landing-img {
@@ -46,10 +47,6 @@
 
     .landing-title-box {
         width: 40%;
-    }
-
-    .landing-subtitle {
-        margin-top: -2rem;
     }
 
     .landing-img {

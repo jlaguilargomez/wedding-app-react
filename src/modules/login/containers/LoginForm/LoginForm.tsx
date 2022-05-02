@@ -6,23 +6,20 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import styles from 'styles/containers/LoginForm.module.scss';
 import toast from 'react-hot-toast';
 import { auth } from 'lib/firebase/firebase.config.js';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface LoginForm {
-    email: string;
+    user: string;
     pass: string;
 }
 
-// interface LoginFormProps {
-//     formValues: LoginForm;
-// }
 interface IUserLoginInfo {
-    email: string;
+    user: string;
     pass: string;
 }
 
 const defaultUserLoginInfo: IUserLoginInfo = {
-    email: '',
+    user: '',
     pass: '',
 };
 
@@ -30,14 +27,14 @@ function LoginForm(): JSX.Element {
     console.log('LoginForm');
 
     const [form, setForm] = useState<LoginForm>(defaultUserLoginInfo);
-    const { user } = useParams();
+    const { userId } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) {
+        if (userId) {
             setForm((prevValue) => ({
                 ...prevValue,
-                email: `${user}@bodamyj.party`,
+                userId,
             }));
         }
     }, []);
@@ -51,13 +48,16 @@ function LoginForm(): JSX.Element {
     ): Promise<void> => {
         event.preventDefault();
 
-        const { email, pass } = form;
+        const { user, pass } = form;
 
-        await toast.promise(auth.signInWithEmailAndPassword(email, pass), {
-            loading: 'Saving...',
-            success: <b>Settings saved!</b>,
-            error: <b>Could not save.</b>,
-        });
+        await toast.promise(
+            auth.signInWithEmailAndPassword(`${user}@bodamaruyjose.com`, pass),
+            {
+                loading: 'Saving...',
+                success: <b>Settings saved!</b>,
+                error: <b>Could not save.</b>,
+            }
+        );
 
         navigate('/');
     };
@@ -70,8 +70,8 @@ function LoginForm(): JSX.Element {
         >
             <Input
                 labelText="Usuario"
-                name="email"
-                value={form.email}
+                name="user"
+                value={form.user}
                 onChangeEvent={handleInput}
             />
             <Input

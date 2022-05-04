@@ -5,10 +5,10 @@
     width: 85%;
 
     @include respond(tablet) {
-        width: 70%;
+        width: 65%;
     }
 
     @include respond(desktop) {
-        width: 40%;
+        width: 30%;
     }
 }

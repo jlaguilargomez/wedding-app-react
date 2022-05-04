@@ -10,7 +10,7 @@
 }
 
 .landing-title-box {
-    width: 100%;
+    width: 70%;
 }
 
 .landing-title {
@@ -34,8 +34,18 @@
 }
 
 .landing-img {
-    width: 80%;
+    width: 70%;
     filter: drop-shadow(1.5px 1.5px 5px #222);
+}
+
+@include respond(tablet) {
+    .landing-title-box {
+        width: 55%;
+    }
+
+    .landing-img {
+        width: 60%;
+    }
 }
 
 @include respond(desktop) {
@@ -50,7 +60,7 @@
     }
 
     .landing-img {
-        width: 30%;
+        width: 45%;
         filter: drop-shadow(1.5px 1.5px 5px #222);
     }
 }

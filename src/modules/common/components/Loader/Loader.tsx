@@ -7,7 +7,12 @@ interface LoaderProps {
 }
 
 function Loader({ show }: LoaderProps): JSX.Element | null {
-    return show ? <div className={styles.loader} /> : null;
+    return show ? (
+        <div className={styles['loader-container']}>
+            <h3>Recargando desinconjas...</h3>
+            <p className={styles.loader} />
+        </div>
+    ) : null;
 }
 
 export default Loader;

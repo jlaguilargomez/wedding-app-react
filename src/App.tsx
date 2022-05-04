@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from 'modules/common/context/Auth/auth.context';
 import { Toaster } from 'react-hot-toast';
 import AuthGuard from 'modules/common/guards/auth.guard';
+import Main from 'modules/dashboard/pages/Main/Main';
 
 function App(): JSX.Element {
     return (
@@ -18,6 +19,14 @@ function App(): JSX.Element {
                             element={
                                 <AuthGuard>
                                     <Landing />
+                                </AuthGuard>
+                            }
+                        />
+                        <Route
+                            path="/main"
+                            element={
+                                <AuthGuard>
+                                    <Main />
                                 </AuthGuard>
                             }
                         />

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/Auth/auth.context';
 
 interface AuthGuardProps {
@@ -8,9 +8,10 @@ interface AuthGuardProps {
 
 function AuthGuard({ children }: AuthGuardProps): JSX.Element {
     const { isAuthenticated } = useContext(AuthContext);
+    const location = useLocation();
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     return children;

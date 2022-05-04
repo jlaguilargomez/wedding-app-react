@@ -6,8 +6,11 @@ import WeddingKiss from 'assets/img/wedding-kiss.png';
 
 import styles from 'styles/pages/Landing.module.scss';
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
+import { useNavigate } from 'react-router-dom';
 
 function Landing(): JSX.Element {
+    const navigate = useNavigate();
+
     return (
         <main className={styles['landing-container']}>
             <div className={styles['landing-title-box']}>
@@ -27,7 +30,7 @@ function Landing(): JSX.Element {
                 alt="novios"
             />
 
-            <ActionButton />
+            <ActionButton onClickEvent={() => navigate('/main')} />
         </main>
     );
 }

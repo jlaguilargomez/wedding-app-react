@@ -26,7 +26,7 @@ function ContactInfo({ name, phoneNumber }: ContactInfoProps): JSX.Element {
                         alt="whatsapp icon"
                     />
                 </a>
-                <a href={`tell:+34${phoneNumber}`}>
+                <a href={`tel:${phoneNumber}`}>
                     <img
                         className={styles.contact__icon}
                         src={PhoneIcon}

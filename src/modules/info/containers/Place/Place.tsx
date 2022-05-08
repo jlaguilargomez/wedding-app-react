@@ -28,13 +28,6 @@ function Place(): JSX.Element {
                     );
                 }}
             />
-            <Button
-                btnStyle="secondary"
-                text="Web Finca Monteviejo"
-                onClickEvent={() => {
-                    window.open('https://www.fincamonteviejo.com/');
-                }}
-            />
         </>
     );
 }

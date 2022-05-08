@@ -1,32 +1,14 @@
 .action-button {
-    position: fixed;
-    align-self: end;
-    border-radius: 100%;
-    background: var(--light-brown);
-    color: var(--big-brown);
-    width: 40px;
-    height: 40px;
-    bottom: 5rem;
-    box-shadow: 2px 1px 10px 2px grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: var(--big-brown);
+    color: var(--light-brown);
+    width: 3.5rem;
+    height: 3.5rem;
     font-size: 2.5rem;
+    padding: 1.6rem;
     transition: 0.2s all;
-
-    &--next {
-        right: 20px;
-
-        &:active {
-            transform: translateY(2px) scale(0.9);
-            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
-        }
-    }
-
-    &--back {
-        left: 20px;
-        transform: rotate(180deg);
-
-        &:active {
-            transform: translateY(2px) rotate(180deg) scale(0.9);
-            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
-        }
-    }
+    margin: 0 0.5rem;
 }

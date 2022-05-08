@@ -1,4 +1,4 @@
-import ActionButton from 'modules/common/components/ActionButton/ActionButton';
+import ActionButton from 'modules/common/components/NavButton/NavButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import Modal from 'modules/common/containers/Modal/Modal';

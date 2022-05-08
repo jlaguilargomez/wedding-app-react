@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import AuthGuard from 'modules/common/guards/auth.guard';
 import Main from 'modules/dashboard/pages/Main/Main';
 import Info from 'modules/info/pages/Info/Info';
+import JoinForm from 'modules/form/pages/JoinForm/JoinForm';
 
 function App(): JSX.Element {
     return (
@@ -36,6 +37,14 @@ function App(): JSX.Element {
                             element={
                                 <AuthGuard>
                                     <Info />
+                                </AuthGuard>
+                            }
+                        />
+                        <Route
+                            path="/join"
+                            element={
+                                <AuthGuard>
+                                    <JoinForm />
                                 </AuthGuard>
                             }
                         />

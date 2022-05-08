@@ -30,13 +30,8 @@ button {
     cursor: pointer;
 }
 
-.flex {
-    display: flex;
-    &--column {
-        flex-direction: column;
-    }
-
-    &--space-between {
-        justify-content: space-between;
-    }
+button,
+label,
+input {
+    -webkit-tap-highlight-color: transparent;
 }

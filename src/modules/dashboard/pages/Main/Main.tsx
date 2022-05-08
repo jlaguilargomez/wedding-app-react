@@ -1,13 +1,15 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
-import React from 'react';
+import Modal from 'modules/common/containers/Modal/Modal';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from 'styles/pages/Main.module.scss';
 
 function Main(): JSX.Element {
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     return (
         <>
@@ -26,10 +28,16 @@ function Main(): JSX.Element {
                     </p>
                 </div>
             </InfoCard>
+            {showModal && (
+                <Modal>
+                    <h1>Soy un modal</h1>
+                </Modal>
+            )}
             <Button text="¡Me apunto!" />
             <Button btnStyle="secondary" text="Info" />
             <Button btnStyle="secondary" text="Sorteo..." />
             <ActionButton position="back" onClickEvent={() => navigate('/')} />
+            <ActionButton onClickEvent={() => navigate('/info')} />
         </>
     );
 }

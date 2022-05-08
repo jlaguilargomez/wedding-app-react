@@ -2,18 +2,38 @@ import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import Modal from 'modules/common/containers/Modal/Modal';
+import Calendar from 'modules/info/containers/Calendar/Calendar';
 import Contact from 'modules/info/containers/Contact/Contact';
+import Place from 'modules/info/containers/Place/Place';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from 'styles/pages/Info.module.scss';
 
+enum ModalInfo {
+    CONTACT = 'contact',
+    PLACE = 'place',
+    CALENDAR = 'calendar',
+}
+
+const modalInfoData = {
+    contact: <Contact />,
+    place: <Place />,
+    calendar: <Calendar />,
+};
+
 function Info(): JSX.Element {
-    const [showModal, setShowModal] = useState<boolean>(true);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [modalInfo, setModalInfo] = useState<ModalInfo>(ModalInfo.CONTACT);
     const navigate = useNavigate();
 
     const toggleModal = (): void =>
         setShowModal((prevValue: boolean) => !prevValue);
+
+    const openSpecificModal = (modalType: ModalInfo): void => {
+        setShowModal(true);
+        setModalInfo(modalType);
+    };
 
     return (
         <>
@@ -30,16 +50,26 @@ function Info(): JSX.Element {
                 </InfoCard>
             </div>
 
-            <Button text="Contacto" onClickEvent={toggleModal} />
-            <Button text="¿Cómo llegar?" />
-            <Button text="Añadir al calendario" />
+            <Button
+                text="Contacto"
+                onClickEvent={() => openSpecificModal(ModalInfo.CONTACT)}
+            />
+            <Button
+                text="¿Cómo llegar?"
+                onClickEvent={() => openSpecificModal(ModalInfo.PLACE)}
+            />
+            <Button
+                text="Añadir al calendario"
+                onClickEvent={() => openSpecificModal(ModalInfo.CALENDAR)}
+            />
+
             <ActionButton
                 position="back"
                 onClickEvent={() => navigate('/main')}
             />
             {showModal && (
                 <Modal onClickClose={toggleModal}>
-                    <Contact />
+                    {modalInfoData[modalInfo]}
                 </Modal>
             )}
         </>

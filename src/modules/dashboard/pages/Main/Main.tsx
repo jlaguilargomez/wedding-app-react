@@ -1,7 +1,6 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
-import Modal from 'modules/common/containers/Modal/Modal';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UsMain from 'assets/img/us_main.jpg';

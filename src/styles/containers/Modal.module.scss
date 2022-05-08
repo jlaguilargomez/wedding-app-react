@@ -26,6 +26,7 @@
     background: var(--big-brown);
     animation: pop-swirl 0.4s linear;
     text-align: center;
+    line-height: 3rem;
     @include shadow();
 
     &__button {

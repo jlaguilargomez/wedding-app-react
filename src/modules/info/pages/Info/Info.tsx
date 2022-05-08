@@ -2,6 +2,7 @@ import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import Modal from 'modules/common/containers/Modal/Modal';
+import Contact from 'modules/info/containers/Contact/Contact';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,20 +39,7 @@ function Info(): JSX.Element {
             />
             {showModal && (
                 <Modal onClickClose={toggleModal}>
-                    <>
-                        <h2 className="secondary-title">Contacto</h2>
-                        <div>
-                            <p>
-                                Jose Luis{' '}
-                                <a href="https://wa.me/616379123">
-                                    616 37 91 23
-                                </a>
-                            </p>
-                            <p>
-                                Maru <span>620 75 40 67</span>
-                            </p>
-                        </div>
-                    </>
+                    <Contact />
                 </Modal>
             )}
         </>

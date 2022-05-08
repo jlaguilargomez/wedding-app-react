@@ -7,7 +7,7 @@ import { AuthContextProvider } from 'modules/common/context/Auth/auth.context';
 import { Toaster } from 'react-hot-toast';
 import AuthGuard from 'modules/common/guards/auth.guard';
 import Main from 'modules/dashboard/pages/Main/Main';
-import Info from 'modules/info/pages/Info';
+import Info from 'modules/info/pages/Info/Info';
 
 function App(): JSX.Element {
     return (

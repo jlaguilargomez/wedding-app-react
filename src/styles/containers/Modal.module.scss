@@ -1,0 +1,57 @@
+@import '../abstracts/mixins';
+
+.modal-layout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--light-brown--translucid);
+}
+
+.modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid white;
+    padding: 2rem 1rem;
+    width: 85%;
+    border-radius: 20px;
+    color: var(--good-white);
+    background: var(--big-brown);
+    animation: pop-swirl 0.4s linear;
+    text-align: center;
+    line-height: 3rem;
+    @include shadow();
+
+    &__button {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        background: var(--light-brown);
+        color: var(--big-brown);
+        border-radius: 100%;
+        font-size: 2rem;
+    }
+
+    @include respond(tablet) {
+        width: 50%;
+    }
+}
+
+@keyframes pop-swirl {
+    0% {
+        transform: scale(0) rotate(360deg);
+    }
+    60% {
+        transform: scale(0.8) rotate(-10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}

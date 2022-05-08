@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFound from 'modules/common/containers/NotFound/NotFound';
+import NotFound from 'modules/common/pages/NotFound/NotFound';
 import Landing from 'modules/dashboard/pages/Landing/Landing';
 import Login from 'modules/login/pages/Login/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { AuthContextProvider } from 'modules/common/context/Auth/auth.context';
 import { Toaster } from 'react-hot-toast';
 import AuthGuard from 'modules/common/guards/auth.guard';
 import Main from 'modules/dashboard/pages/Main/Main';
+import Info from 'modules/info/pages/Info/Info';
 
 function App(): JSX.Element {
     return (
@@ -27,6 +28,14 @@ function App(): JSX.Element {
                             element={
                                 <AuthGuard>
                                     <Main />
+                                </AuthGuard>
+                            }
+                        />
+                        <Route
+                            path="/info"
+                            element={
+                                <AuthGuard>
+                                    <Info />
                                 </AuthGuard>
                             }
                         />

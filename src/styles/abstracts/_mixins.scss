@@ -10,5 +10,9 @@
             @content;
         }
     }
+}
 
+@mixin shadow() {
+    -webkit-box-shadow: 6px 6px 14px 2px rgba(0, 0, 0, 0.39);
+    box-shadow: 6px 6px 14px 2px rgba(0, 0, 0, 0.39);
 }

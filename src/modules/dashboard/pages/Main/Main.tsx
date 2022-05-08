@@ -1,8 +1,9 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UsMain from 'assets/img/us_main.jpg';
 
 import styles from 'styles/pages/Main.module.scss';
 
@@ -12,6 +13,7 @@ function Main(): JSX.Element {
     return (
         <>
             <h1>¡Nos casamos!</h1>
+            <img className={styles.main__img} src={UsMain} alt="nosotros" />
             <InfoCard>
                 <div>
                     <p>
@@ -26,9 +28,10 @@ function Main(): JSX.Element {
                     </p>
                 </div>
             </InfoCard>
+
             <Button text="¡Me apunto!" />
-            <Button btnStyle="secondary" text="Info" />
-            <Button btnStyle="secondary" text="Sorteo..." />
+            <Button text="Info" onClickEvent={() => navigate('/info')} />
+            <Button text="Sorteo..." />
             <ActionButton position="back" onClickEvent={() => navigate('/')} />
         </>
     );

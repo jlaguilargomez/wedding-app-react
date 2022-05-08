@@ -29,3 +29,14 @@ button {
     border: none;
     cursor: pointer;
 }
+
+.flex {
+    display: flex;
+    &--column {
+        flex-direction: column;
+    }
+
+    &--space-between {
+        justify-content: space-between;
+    }
+}

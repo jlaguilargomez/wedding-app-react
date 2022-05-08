@@ -5,21 +5,23 @@ import React from 'react';
 import cn from 'classnames';
 
 import styles from 'styles/pages/JoinForm.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 function JoinForm(): JSX.Element {
+    const navigate = useNavigate();
     return (
         <>
             <h1>Únete</h1>
 
             <section className={styles['join-form__list']}>
                 <div className={styles['join-form__elem']}>
-                    Jose Luis Aguilar
+                    Mariano Rajoy Brey
                     <div className="flex">
                         <ActionButton icon="E" /> <ActionButton icon="R" />
                     </div>
                 </div>
                 <div className={styles['join-form__elem']}>
-                    Jose Luis Aguilar
+                    Roberto Carlos
                     <div className="flex">
                         <ActionButton icon="E" /> <ActionButton icon="R" />
                     </div>
@@ -46,7 +48,7 @@ function JoinForm(): JSX.Element {
                     Vuelta
                 </label>
             </form>
-            <NavButton position="back" />
+            <NavButton position="back" onClickEvent={() => navigate('/main')} />
         </>
     );
 }

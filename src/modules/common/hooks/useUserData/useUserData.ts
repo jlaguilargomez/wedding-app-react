@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface IUseUserData {
-    user: any;
     userData: any;
 }
 
@@ -31,5 +30,5 @@ export const useUserData = (): IUseUserData => {
         return unsubscribe;
     }, [user]);
 
-    return { user, userData };
+    return { userData };
 };

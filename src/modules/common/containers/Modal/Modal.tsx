@@ -7,9 +7,10 @@ const modalRoot = document.getElementById('modal');
 
 interface ModalProps {
     children: JSX.Element;
+    onClickClose?: () => void;
 }
 
-const Modal = ({ children }: ModalProps): JSX.Element => {
+const Modal = ({ children, onClickClose }: ModalProps): JSX.Element => {
     const elRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
     if (!elRef.current) {
         console.log('se crea la modal');
@@ -24,7 +25,6 @@ const Modal = ({ children }: ModalProps): JSX.Element => {
         // eslint-disable-next-line consistent-return
         return () => {
             if (elRef.current) {
-                console.log('NO AQUI!');
                 modalRoot.removeChild(elRef.current);
             }
         };
@@ -32,7 +32,16 @@ const Modal = ({ children }: ModalProps): JSX.Element => {
 
     return createPortal(
         <div className={styles['modal-layout']}>
-            <aside className={styles.modal}>{children}</aside>
+            <aside className={styles.modal}>
+                <button
+                    className={styles.modal__button}
+                    type="button"
+                    onClick={onClickClose}
+                >
+                    X
+                </button>
+                {children}
+            </aside>
         </div>,
         elRef.current
     );

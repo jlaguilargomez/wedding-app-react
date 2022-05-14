@@ -6,12 +6,14 @@ import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface IUseUserData {
-    userData: any;
+    userData: UserData | null;
+    loadingUser: boolean;
 }
 
 export const useUserData = (): IUseUserData => {
     const [user] = useAuthState(auth as any);
     const [userData, setUserData] = useState<UserData | null>(null);
+    const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
     useEffect(() => {
         // turn off realtime subscription
@@ -22,6 +24,7 @@ export const useUserData = (): IUseUserData => {
 
             unsubscribe = ref.onSnapshot((doc: any): void => {
                 setUserData(doc.data() as UserData);
+                setLoadingUser(false);
             });
         } else {
             setUserData(null);
@@ -30,5 +33,5 @@ export const useUserData = (): IUseUserData => {
         return unsubscribe;
     }, [user]);
 
-    return { userData };
+    return { userData, loadingUser };
 };

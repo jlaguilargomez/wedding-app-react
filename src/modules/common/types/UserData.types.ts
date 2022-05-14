@@ -1,15 +1,15 @@
-interface IRaffle {
+export interface IRaffle {
     isInvolved: boolean;
     luckyNumber: number;
     raffleType?: string;
 }
 
-interface IByBus {
+export interface IByBus {
     onArrive: boolean;
     onOutward: boolean;
 }
 
-interface IRelative {
+export interface IRelative {
     name: string;
     child: boolean;
     username: string;
@@ -20,6 +20,7 @@ interface IRelative {
 export interface UserData {
     byBus: IByBus;
     raffle: IRaffle;
-    relatives: { [key: string]: IRelative };
+    isAdmin: boolean;
+    relatives: Array<IRelative>;
     aditionalInfo: string;
 }

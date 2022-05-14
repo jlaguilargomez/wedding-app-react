@@ -1,6 +1,12 @@
 interface IRaffle {
     isInvolved: boolean;
     luckyNumber: number;
+    raffleType?: string;
+}
+
+interface IByBus {
+    onArrive: boolean;
+    onOutward: boolean;
 }
 
 interface IRelative {
@@ -12,7 +18,8 @@ interface IRelative {
 }
 
 export interface UserData {
-    byBus: boolean;
+    byBus: IByBus;
     raffle: IRaffle;
     relatives: { [key: string]: IRelative };
+    aditionalInfo: string;
 }

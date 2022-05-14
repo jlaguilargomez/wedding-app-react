@@ -1,13 +1,13 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import NavButton from 'modules/common/components/NavButton/NavButton';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import styles from 'styles/pages/JoinForm.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useUserData } from 'modules/common/hooks/useUserData/useUserData';
 import Loader from 'modules/common/components/Loader/Loader';
 import { IRelative } from 'modules/common/types/UserData.types';
-import { relative } from 'path';
 import Modal from 'modules/common/containers/Modal/Modal';
 import Input from 'modules/common/components/Input/Input';
 import Button from 'modules/common/components/Button/Button';
@@ -93,10 +93,21 @@ function UserDataForm(): JSX.Element {
 
 function JoinForm(): JSX.Element {
     const navigate = useNavigate();
-    const { userData, loadingUser } = useUserData();
-    const [showUserModal, setShowUserModal] = useState<boolean>(true);
+    const { userData, loadingUser, updateTravelData } = useUserData();
+    const [showUserModal, setShowUserModal] = useState<boolean>(false);
 
     const toggleUserModal = (): void => setShowUserModal((prev) => !prev);
+
+    const updateUserData = async (
+        param: string,
+        newData: boolean
+    ): Promise<void> => {
+        await toast.promise(updateTravelData(param, newData), {
+            loading: 'Actualizando...',
+            success: <b>Datos actualizados</b>,
+            error: <b>No se han podido actualizar los datos</b>,
+        });
+    };
 
     if (loadingUser) {
         return <Loader show />;
@@ -118,19 +129,23 @@ function JoinForm(): JSX.Element {
             <form className={styles['join-form__family-info']}>
                 <p>¿Necesitas bus?</p>
                 <CheckBox
-                    name="go"
+                    name="onArrive"
                     isChecked={userData.byBus.onArrive}
                     label="Ida"
-                    onChangeEvent={console.log}
+                    onChangeEvent={updateUserData}
                 />
                 <CheckBox
-                    name="back"
+                    name="onOutward"
                     isChecked={userData.byBus.onOutward}
                     label="Vuelta"
-                    onChangeEvent={console.log}
+                    onChangeEvent={updateUserData}
                 />
 
-                <TextArea label="Texto" />
+                <TextArea
+                    label="Texto"
+                    content={userData.aditionalInfo}
+                    onTextAreaChange={console.log}
+                />
             </form>
             {showUserModal && (
                 <Modal onClickClose={toggleUserModal}>

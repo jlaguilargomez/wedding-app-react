@@ -4,11 +4,11 @@ import { UserData } from 'modules/common/types/UserData.types';
 import { auth, firestore } from 'lib/firebase/firebase.config.js';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useDocument } from 'react-firebase-hooks/firestore';
 
 interface IUseUserData {
     userData: UserData | null;
     loadingUser: boolean;
+    updateTravelData: (name: string, value: boolean) => Promise<void | null>;
 }
 
 export const useUserData = (): IUseUserData => {
@@ -16,6 +16,27 @@ export const useUserData = (): IUseUserData => {
 
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loadingUser, setLoadingUser] = useState<boolean>(true);
+
+    const updateTravelData = async (
+        name: string,
+        value: boolean
+    ): Promise<void | null> => {
+        if (user && userData) {
+            const { byBus } = userData;
+
+            return firestore
+                .collection('users')
+                .doc(user.uid)
+                .update({
+                    byBus: {
+                        ...byBus,
+                        ...{ [name]: value },
+                    },
+                });
+        }
+
+        return null;
+    };
 
     useEffect(() => {
         // turn off realtime subscription
@@ -35,5 +56,5 @@ export const useUserData = (): IUseUserData => {
         return unsubscribe;
     }, [user]);
 
-    return { userData, loadingUser };
+    return { userData, loadingUser, updateTravelData };
 };

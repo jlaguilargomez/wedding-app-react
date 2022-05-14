@@ -1,46 +1,114 @@
+/* eslint-disable no-debugger */
 import Button from 'modules/common/components/Button/Button';
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import Input from 'modules/common/components/Input/Input';
+import { useUserData } from 'modules/common/hooks/useUserData/useUserData';
 import { IRelative } from 'modules/common/types/UserData.types';
-import React, { useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface RelativeFormProps {
     relativeInfo?: IRelative;
+    cleanRelativeData: () => void;
+    closeModal: () => void;
 }
 
-interface IRelativeForm {
+// TODO: Quiza estaria mejor en un archivo de tipos
+export interface IRelativeForm {
     name: string;
-    child: string;
-    vegetarian: string;
-    allergies: Array<string>;
+    child: boolean;
+    vegetarian: boolean;
+    allergies: string;
 }
 
-function RelativeForm({ relativeInfo }: RelativeFormProps): JSX.Element {
-    const [showAllergies, setShowAllergies] = useState<boolean>(true);
-    const [relativeFormData, setRelativeFormData] = useState<IRelativeForm>();
+const defaultFormData: IRelativeForm = {
+    name: '',
+    child: false,
+    vegetarian: false,
+    allergies: '',
+};
 
-    console.log(relativeInfo);
+function RelativeForm({
+    relativeInfo,
+    closeModal,
+    cleanRelativeData,
+}: RelativeFormProps): JSX.Element {
+    const [showAllergies, setShowAllergies] = useState<boolean>(true);
+    const [username, setUserName] = useState<string>();
+    const [relativeFormData, setRelativeFormData] =
+        useState<IRelativeForm>(defaultFormData);
+
+    const { addNewRelative, editRelative } = useUserData();
+
+    useEffect(() => {
+        if (relativeInfo) {
+            setUserName(relativeInfo.username);
+            const { name, child, vegetarian, allergies } = relativeInfo;
+            setShowAllergies(!!allergies);
+            setRelativeFormData({ name, child, vegetarian, allergies });
+        }
+
+        // TODO: Añadir error si no encuentra usuario
+
+        return () => cleanRelativeData();
+    }, []);
+
+    const handleInputChange = (name: string, value: string | boolean): void => {
+        setRelativeFormData((prev: IRelativeForm) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (event: FormEvent): Promise<void> => {
+        event.preventDefault();
+
+        if (username) {
+            await toast.promise(
+                editRelative({
+                    ...relativeFormData,
+                    username,
+                }),
+                {
+                    loading: 'Editando invitado...',
+                    success: <b>Acompañante editado</b>,
+                    error: <b>No se ha podido crear</b>,
+                }
+            );
+        } else {
+            // TODO: Seria bueno crear un componente que se encargara de esto
+            await toast.promise(addNewRelative(relativeFormData), {
+                loading: 'Creando nuevo invitado...',
+                success: <b>Nuevo acompañante añadido</b>,
+                error: <b>No se ha podido crear</b>,
+            });
+        }
+
+        closeModal();
+    };
+
     return (
         <>
             <h2>Añadir invitado</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Input
                     name="name"
                     labelText="Nombre"
-                    value="Pepe"
-                    onChangeEvent={console.log}
+                    value={relativeFormData.name}
+                    onChangeEvent={handleInputChange}
+                    required
                 />
                 <CheckBox
                     name="child"
-                    isChecked={false}
+                    isChecked={relativeFormData.child}
                     label="¿Es infante?"
-                    onChangeEvent={console.log}
+                    onChangeEvent={handleInputChange}
                 />
                 <CheckBox
                     name="vegetarian"
-                    isChecked={false}
+                    isChecked={relativeFormData.vegetarian}
                     label="¿Vegetariano?"
-                    onChangeEvent={console.log}
+                    onChangeEvent={handleInputChange}
                 />
                 <CheckBox
                     name="isAllergic"
@@ -51,10 +119,11 @@ function RelativeForm({ relativeInfo }: RelativeFormProps): JSX.Element {
                 {showAllergies && (
                     // TODO: quiza mejor un textarea aqui
                     <Input
-                        name="alergies"
+                        name="allergies"
                         labelText="Introduce tus alergias"
-                        value="Costillas, mierda"
-                        onChangeEvent={console.log}
+                        value={relativeFormData.allergies}
+                        onChangeEvent={handleInputChange}
+                        required={showAllergies}
                     />
                 )}
 

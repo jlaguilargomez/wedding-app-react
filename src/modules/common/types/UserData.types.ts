@@ -14,7 +14,7 @@ export interface IRelative {
     child: boolean;
     username: string;
     vegetarian: boolean;
-    allergies: Array<string>;
+    allergies: string;
 }
 
 export interface UserData {

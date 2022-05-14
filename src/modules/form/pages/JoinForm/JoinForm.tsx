@@ -14,11 +14,18 @@ import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import TextArea from 'modules/common/components/TextArea/TextArea';
 import RelativeForm from 'modules/form/containers/RelativeForm/RelativeForm';
 import RelativesPanel from 'modules/form/components/RelativesPanel/RelativesPanel';
+import { IRelative } from 'modules/common/types/UserData.types';
 
 function JoinForm(): JSX.Element {
-    const navigate = useNavigate();
-    const { userData, loadingUser, updateTravelData } = useUserData();
+    const { userData, loadingUser, updateTravelData, removeRelative } =
+        useUserData();
+
+    // TODO: Tipa esto
+    const [relativeToEdit, setRelativeToEdit] = useState<
+        IRelative | undefined
+    >();
     const [showUserModal, setShowUserModal] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const toggleUserModal = (): void => setShowUserModal((prev) => !prev);
 
@@ -26,6 +33,7 @@ function JoinForm(): JSX.Element {
         param: string,
         newData: boolean
     ): Promise<void> => {
+        // TODO: Seria bueno crear un componente que se encargara de esto
         await toast.promise(updateTravelData(param, newData), {
             loading: 'Actualizando...',
             success: <b>Datos actualizados</b>,
@@ -46,8 +54,15 @@ function JoinForm(): JSX.Element {
             <h1>Únete</h1>
             <RelativesPanel
                 relatives={userData.relatives}
-                onEditUser={console.log}
-                onRemoveUser={console.log}
+                onEditUser={(username: string) => {
+                    const relativeSelected = userData.relatives.filter(
+                        (rel) => rel.username === username
+                    )[0];
+                    setRelativeToEdit(relativeSelected);
+
+                    toggleUserModal();
+                }}
+                onRemoveUser={removeRelative}
                 onAddNewUser={toggleUserModal}
             />
             <form className={styles['join-form__family-info']}>
@@ -65,15 +80,20 @@ function JoinForm(): JSX.Element {
                     onChangeEvent={updateUserData}
                 />
 
-                <TextArea
+                {/* TODO: Dale formato a esto y muestralo */}
+                {/* <TextArea
                     label="Texto"
                     content={userData.aditionalInfo}
                     onTextAreaChange={console.log}
-                />
+                /> */}
             </form>
             {showUserModal && (
                 <Modal onClickClose={toggleUserModal}>
-                    <RelativeForm />
+                    <RelativeForm
+                        closeModal={toggleUserModal}
+                        relativeInfo={relativeToEdit}
+                        cleanRelativeData={() => setRelativeToEdit(undefined)}
+                    />
                 </Modal>
             )}
             <NavButton position="back" onClickEvent={() => navigate('/main')} />

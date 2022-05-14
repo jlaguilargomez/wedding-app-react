@@ -4,6 +4,7 @@ import { UserData } from 'modules/common/types/UserData.types';
 import { auth, firestore } from 'lib/firebase/firebase.config.js';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
 interface IUseUserData {
     userData: UserData | null;
@@ -12,6 +13,7 @@ interface IUseUserData {
 
 export const useUserData = (): IUseUserData => {
     const [user] = useAuthState(auth as any);
+
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loadingUser, setLoadingUser] = useState<boolean>(true);
 

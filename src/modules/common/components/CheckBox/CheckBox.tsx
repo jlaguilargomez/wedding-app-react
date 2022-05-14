@@ -4,14 +4,14 @@ import cn from 'classnames';
 
 interface CheckboxProps {
     name: string;
-    checked: boolean;
+    isChecked: boolean;
     label: string;
-    onChangeEvent: () => void;
+    onChangeEvent: (name: string, checked: boolean) => void;
 }
 
 function CheckBox({
     name,
-    checked,
+    isChecked,
     label,
     onChangeEvent,
 }: CheckboxProps): JSX.Element {
@@ -21,8 +21,10 @@ function CheckBox({
                 id={name}
                 name={name}
                 type="checkbox"
-                checked={checked}
-                onChange={onChangeEvent}
+                checked={isChecked}
+                onChange={(e: any) =>
+                    onChangeEvent(e.target.name, e.target.checked)
+                }
             />
             <span className="checkmark" />
             {label}

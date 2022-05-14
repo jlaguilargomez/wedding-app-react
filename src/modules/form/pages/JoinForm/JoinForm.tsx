@@ -16,9 +16,17 @@ import TextArea from 'modules/common/components/TextArea/TextArea';
 
 interface RepativesPanelProps {
     relatives: Array<IRelative>;
+    onEditUser: (username: string) => void;
+    onRemoveUser: (username: string) => void;
+    onAddNewUser: () => void;
 }
 
-function RelativesPanel({ relatives }: RepativesPanelProps): JSX.Element {
+function RelativesPanel({
+    relatives,
+    onEditUser,
+    onRemoveUser,
+    onAddNewUser,
+}: RepativesPanelProps): JSX.Element {
     if (!relatives?.length) {
         <h1>No hay datos de familiares</h1>;
     }
@@ -29,7 +37,16 @@ function RelativesPanel({ relatives }: RepativesPanelProps): JSX.Element {
                     <div className={styles['join-form__elem']} key={username}>
                         <p>{name}</p>
                         <div className="flex">
-                            <ActionButton icon="E" /> <ActionButton icon="R" />
+                            <ActionButton
+                                icon="E"
+                                onClickEvent={() => onEditUser(username)}
+                            />{' '}
+                            <ActionButton
+                                icon="R"
+                                onClickEvent={() => {
+                                    onRemoveUser(username);
+                                }}
+                            />
                         </div>
                     </div>
                 ))}
@@ -37,7 +54,7 @@ function RelativesPanel({ relatives }: RepativesPanelProps): JSX.Element {
             <div className={styles['join-form__elem']}>
                 <p>Añadir invitado</p>
                 <div className="flex">
-                    <ActionButton icon="+" />
+                    <ActionButton icon="+" onClickEvent={onAddNewUser} />
                 </div>
             </div>
         </>
@@ -57,7 +74,7 @@ function UserDataForm(): JSX.Element {
                 />
                 <CheckBox
                     name="go"
-                    checked
+                    isChecked={false}
                     label="Ida"
                     onChangeEvent={console.log}
                 />
@@ -79,6 +96,8 @@ function JoinForm(): JSX.Element {
     const { userData, loadingUser } = useUserData();
     const [showUserModal, setShowUserModal] = useState<boolean>(true);
 
+    const toggleUserModal = (): void => setShowUserModal((prev) => !prev);
+
     if (loadingUser) {
         return <Loader show />;
     }
@@ -90,18 +109,23 @@ function JoinForm(): JSX.Element {
     return (
         <>
             <h1>Únete</h1>
-            <RelativesPanel relatives={userData.relatives} />
+            <RelativesPanel
+                relatives={userData.relatives}
+                onEditUser={console.log}
+                onRemoveUser={console.log}
+                onAddNewUser={toggleUserModal}
+            />
             <form className={styles['join-form__family-info']}>
                 <p>¿Necesitas bus?</p>
                 <CheckBox
                     name="go"
-                    checked={userData.byBus.onArrive}
+                    isChecked={userData.byBus.onArrive}
                     label="Ida"
                     onChangeEvent={console.log}
                 />
                 <CheckBox
                     name="back"
-                    checked={userData.byBus.onOutward}
+                    isChecked={userData.byBus.onOutward}
                     label="Vuelta"
                     onChangeEvent={console.log}
                 />
@@ -109,7 +133,7 @@ function JoinForm(): JSX.Element {
                 <TextArea label="Texto" />
             </form>
             {showUserModal && (
-                <Modal onClickClose={() => setShowUserModal((prev) => !prev)}>
+                <Modal onClickClose={toggleUserModal}>
                     <UserDataForm />
                 </Modal>
             )}

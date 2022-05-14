@@ -61,7 +61,16 @@ function RelativesPanel({
     );
 }
 
-function UserDataForm(): JSX.Element {
+interface IRelativeForm {
+    name: string;
+    child: string;
+    vegetarian: string;
+    allergies: Array<string>;
+}
+
+function RelativeForm(): JSX.Element {
+    const [showAllergies, setShowAllergies] = useState<boolean>(false);
+    const [relativeFormData, setRelativeFormData] = useState<IRelativeForm>();
     return (
         <>
             <h2>Añadir invitado</h2>
@@ -73,17 +82,32 @@ function UserDataForm(): JSX.Element {
                     onChangeEvent={console.log}
                 />
                 <CheckBox
-                    name="go"
+                    name="child"
                     isChecked={false}
-                    label="Ida"
+                    label="¿Es infante?"
                     onChangeEvent={console.log}
                 />
-                <Input
-                    name="alergies"
-                    labelText="Alergias"
-                    value="Costillas, mierda"
+                <CheckBox
+                    name="vegetarian"
+                    isChecked={false}
+                    label="¿Vegetariano?"
                     onChangeEvent={console.log}
                 />
+                <CheckBox
+                    name="isAllergic"
+                    isChecked={false}
+                    label="Tienes alergias?"
+                    onChangeEvent={(_, checked) => setShowAllergies(checked)}
+                />
+                {showAllergies && (
+                    // TODO: quiza mejor un textarea aqui
+                    <Input
+                        name="alergies"
+                        labelText="Introduce tus alergias"
+                        value="Costillas, mierda"
+                        onChangeEvent={console.log}
+                    />
+                )}
 
                 <Button text="Enviar" btnStyle="secondary" type="submit" />
             </form>
@@ -149,7 +173,7 @@ function JoinForm(): JSX.Element {
             </form>
             {showUserModal && (
                 <Modal onClickClose={toggleUserModal}>
-                    <UserDataForm />
+                    <RelativeForm />
                 </Modal>
             )}
             <NavButton position="back" onClickEvent={() => navigate('/main')} />

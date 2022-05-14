@@ -5,7 +5,7 @@ import cn from 'classnames';
 import WeddingKiss from 'assets/img/wedding-kiss.png';
 
 import styles from 'styles/pages/Landing.module.scss';
-import ActionButton from 'modules/common/components/ActionButton/ActionButton';
+import ActionButton from 'modules/common/components/NavButton/NavButton';
 import { useNavigate } from 'react-router-dom';
 
 function Landing(): JSX.Element {

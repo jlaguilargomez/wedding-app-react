@@ -23,7 +23,7 @@ export function UserDataProvider({
         initialState as IUserDataContext
     );
 
-    const { user, userData } = useUserData();
+    const { userData } = useUserData();
 
     const contextValue = useMemo(
         () => ({ state, setState }),

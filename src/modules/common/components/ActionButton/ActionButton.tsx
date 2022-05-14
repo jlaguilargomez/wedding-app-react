@@ -1,28 +1,26 @@
 import React from 'react';
 
-import cn from 'classnames';
-
 import styles from 'styles/components/ActionButton.module.scss';
 
 interface ActionButtonProps {
-    position?: 'next' | 'back';
+    icon?: any;
+    type?: 'button' | 'submit';
     onClickEvent?: () => void;
 }
 
 function ActionButton({
-    position = 'next',
+    icon = 'i',
+    type = 'button',
     onClickEvent,
 }: ActionButtonProps): JSX.Element {
     return (
         <button
-            type="button"
-            className={cn(
-                styles['action-button'],
-                styles[`action-button--${position}`]
-            )}
+            className={styles['action-button']}
+            // eslint-disable-next-line react/button-has-type
+            type={type}
             onClick={onClickEvent}
         >
-            &gt;
+            {icon}
         </button>
     );
 }

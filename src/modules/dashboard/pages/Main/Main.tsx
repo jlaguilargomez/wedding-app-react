@@ -1,4 +1,4 @@
-import ActionButton from 'modules/common/components/ActionButton/ActionButton';
+import ActionButton from 'modules/common/components/NavButton/NavButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import React, { useState } from 'react';
@@ -29,7 +29,7 @@ function Main(): JSX.Element {
                 </div>
             </InfoCard>
 
-            <Button text="¡Me apunto!" />
+            <Button text="¡Me apunto!" onClickEvent={() => navigate('/join')} />
             <Button text="Info" onClickEvent={() => navigate('/info')} />
             <Button text="Sorteo..." />
             <ActionButton position="back" onClickEvent={() => navigate('/')} />

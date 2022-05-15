@@ -24,23 +24,27 @@ function RelativesPanel({
     return (
         <>
             <section className={styles['join-form__list']}>
-                {relatives.map(({ name, username }) => (
-                    <div className={styles['join-form__elem']} key={username}>
-                        <p>{name}</p>
-                        <div className="flex">
-                            <ActionButton
-                                icon="E"
-                                onClickEvent={() => onEditUser(username)}
-                            />{' '}
-                            <ActionButton
-                                icon="R"
-                                onClickEvent={() => {
-                                    onRemoveUser(username);
-                                }}
-                            />
+                {relatives &&
+                    relatives.map(({ name, username }) => (
+                        <div
+                            className={styles['join-form__elem']}
+                            key={username}
+                        >
+                            <p>{name}</p>
+                            <div className="flex">
+                                <ActionButton
+                                    icon="E"
+                                    onClickEvent={() => onEditUser(username)}
+                                />{' '}
+                                <ActionButton
+                                    icon="R"
+                                    onClickEvent={() => {
+                                        onRemoveUser(username);
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </section>
             <div className={styles['join-form__elem']}>
                 <p>Añadir invitado</p>

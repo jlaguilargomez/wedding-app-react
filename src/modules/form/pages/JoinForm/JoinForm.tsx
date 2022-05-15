@@ -11,7 +11,6 @@ import Loader from 'modules/common/components/Loader/Loader';
 import Modal from 'modules/common/containers/Modal/Modal';
 
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
-import TextArea from 'modules/common/components/TextArea/TextArea';
 import RelativeForm from 'modules/form/containers/RelativeForm/RelativeForm';
 import RelativesPanel from 'modules/form/components/RelativesPanel/RelativesPanel';
 import { IRelative } from 'modules/common/types/UserData.types';
@@ -69,13 +68,15 @@ function JoinForm(): JSX.Element {
                 <p>¿Necesitas bus?</p>
                 <CheckBox
                     name="onArrive"
-                    isChecked={userData.byBus.onArrive}
+                    isChecked={userData.byBus ? userData.byBus.onArrive : false}
                     label="Ida"
                     onChangeEvent={updateUserData}
                 />
                 <CheckBox
                     name="onOutward"
-                    isChecked={userData.byBus.onOutward}
+                    isChecked={
+                        userData.byBus ? userData.byBus.onOutward : false
+                    }
                     label="Vuelta"
                     onChangeEvent={updateUserData}
                 />

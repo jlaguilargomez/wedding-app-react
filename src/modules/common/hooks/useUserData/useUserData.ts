@@ -51,6 +51,8 @@ export const useUserData = (): IUseUserData => {
         if (user && userData) {
             const { relatives } = userData;
 
+            console.log(relatives);
+
             // TODO: utiliza la libreria de random ui
             const username = String(Math.random());
 
@@ -58,10 +60,12 @@ export const useUserData = (): IUseUserData => {
                 .collection('users')
                 .doc(user.uid)
                 .update({
-                    relatives: [
-                        ...relatives,
-                        { name, child, vegetarian, allergies, username },
-                    ],
+                    relatives: relatives
+                        ? [
+                              ...relatives,
+                              { name, child, vegetarian, allergies, username },
+                          ]
+                        : [{ name, child, vegetarian, allergies, username }],
                 });
         }
 

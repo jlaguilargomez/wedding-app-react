@@ -14,6 +14,7 @@ export interface IRelative {
     child: boolean;
     username: string;
     vegetarian: boolean;
+    vegan: boolean;
     allergies: string;
 }
 

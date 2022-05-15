@@ -11,7 +11,6 @@ import Loader from 'modules/common/components/Loader/Loader';
 import Modal from 'modules/common/containers/Modal/Modal';
 
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
-import TextArea from 'modules/common/components/TextArea/TextArea';
 import RelativeForm from 'modules/form/containers/RelativeForm/RelativeForm';
 import RelativesPanel from 'modules/form/components/RelativesPanel/RelativesPanel';
 import { IRelative } from 'modules/common/types/UserData.types';
@@ -51,7 +50,15 @@ function JoinForm(): JSX.Element {
 
     return (
         <>
-            <h1>Únete</h1>
+            <h1>¡Únete!</h1>
+            <p className={styles['join-form__text']}>
+                Con este simple formulario nos gustaria conocer vuestras
+                preferencias alimentarias.
+            </p>
+            <p className={styles['join-form__text']}>
+                Por favor, añade tanto tus datos como los de las personas que
+                van a acompañarte en el boton de &apos;Añadir acompañante&apos;
+            </p>
             <RelativesPanel
                 relatives={userData.relatives}
                 onEditUser={(username: string) => {
@@ -69,13 +76,15 @@ function JoinForm(): JSX.Element {
                 <p>¿Necesitas bus?</p>
                 <CheckBox
                     name="onArrive"
-                    isChecked={userData.byBus.onArrive}
+                    isChecked={userData.byBus ? userData.byBus.onArrive : false}
                     label="Ida"
                     onChangeEvent={updateUserData}
                 />
                 <CheckBox
                     name="onOutward"
-                    isChecked={userData.byBus.onOutward}
+                    isChecked={
+                        userData.byBus ? userData.byBus.onOutward : false
+                    }
                     label="Vuelta"
                     onChangeEvent={updateUserData}
                 />

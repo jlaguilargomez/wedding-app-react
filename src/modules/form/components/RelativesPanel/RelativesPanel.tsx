@@ -1,5 +1,8 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import { IRelative } from 'modules/common/types/UserData.types';
+import Pencil from 'assets/svg/pencil.svg';
+import Eraser from 'assets/svg/eraser.svg';
+import Person from 'assets/svg/person.svg';
 import React from 'react';
 
 // TODO: Cambia el modulo
@@ -24,28 +27,32 @@ function RelativesPanel({
     return (
         <>
             <section className={styles['join-form__list']}>
-                {relatives.map(({ name, username }) => (
-                    <div className={styles['join-form__elem']} key={username}>
-                        <p>{name}</p>
-                        <div className="flex">
-                            <ActionButton
-                                icon="E"
-                                onClickEvent={() => onEditUser(username)}
-                            />{' '}
-                            <ActionButton
-                                icon="R"
-                                onClickEvent={() => {
-                                    onRemoveUser(username);
-                                }}
-                            />
+                {relatives &&
+                    relatives.map(({ name, username }) => (
+                        <div
+                            className={styles['join-form__elem']}
+                            key={username}
+                        >
+                            <p>{name}</p>
+                            <div className="flex">
+                                <ActionButton
+                                    icon={Pencil}
+                                    onClickEvent={() => onEditUser(username)}
+                                />{' '}
+                                <ActionButton
+                                    icon={Eraser}
+                                    onClickEvent={() => {
+                                        onRemoveUser(username);
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </section>
             <div className={styles['join-form__elem']}>
-                <p>Añadir invitado</p>
+                <p>Añadir acompañante</p>
                 <div className="flex">
-                    <ActionButton icon="+" onClickEvent={onAddNewUser} />
+                    <ActionButton icon={Person} onClickEvent={onAddNewUser} />
                 </div>
             </div>
         </>

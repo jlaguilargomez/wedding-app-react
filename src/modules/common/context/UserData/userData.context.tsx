@@ -1,5 +1,4 @@
 import React, { createContext, useMemo, useState } from 'react';
-import { useUserData } from 'modules/common/hooks/useUserData/useUserData';
 import {
     ContextProviderProps,
     ProviderValueState,
@@ -22,8 +21,6 @@ export function UserDataProvider({
     const [state, setState] = useState<IUserDataContext>(
         initialState as IUserDataContext
     );
-
-    const { userData } = useUserData();
 
     const contextValue = useMemo(
         () => ({ state, setState }),

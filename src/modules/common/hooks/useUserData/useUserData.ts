@@ -46,10 +46,13 @@ export const useUserData = (): IUseUserData => {
         name,
         child,
         vegetarian,
+        vegan,
         allergies,
     }: IRelativeForm): Promise<void | null> => {
         if (user && userData) {
             const { relatives } = userData;
+
+            console.log(relatives);
 
             // TODO: utiliza la libreria de random ui
             const username = String(Math.random());
@@ -58,10 +61,28 @@ export const useUserData = (): IUseUserData => {
                 .collection('users')
                 .doc(user.uid)
                 .update({
-                    relatives: [
-                        ...relatives,
-                        { name, child, vegetarian, allergies, username },
-                    ],
+                    relatives: relatives
+                        ? [
+                              ...relatives,
+                              {
+                                  name,
+                                  child,
+                                  vegetarian,
+                                  vegan,
+                                  allergies,
+                                  username,
+                              },
+                          ]
+                        : [
+                              {
+                                  name,
+                                  child,
+                                  vegetarian,
+                                  vegan,
+                                  allergies,
+                                  username,
+                              },
+                          ],
                 });
         }
 
@@ -72,6 +93,7 @@ export const useUserData = (): IUseUserData => {
         name,
         child,
         vegetarian,
+        vegan,
         allergies,
         username,
     }: any): Promise<void | null> => {
@@ -80,7 +102,14 @@ export const useUserData = (): IUseUserData => {
 
             const editedRelatives = relatives.map((rel) => {
                 if (rel.username === username) {
-                    return { name, child, vegetarian, allergies, username };
+                    return {
+                        name,
+                        child,
+                        vegetarian,
+                        vegan,
+                        allergies,
+                        username,
+                    };
                 }
 
                 return rel;

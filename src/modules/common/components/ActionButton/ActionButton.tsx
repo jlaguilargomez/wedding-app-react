@@ -3,14 +3,17 @@ import React from 'react';
 import styles from 'styles/components/ActionButton.module.scss';
 
 interface ActionButtonProps {
-    icon?: any;
+    text?: string;
+    icon?: string;
     type?: 'button' | 'submit';
     onClickEvent?: () => void;
 }
 
 function ActionButton({
-    icon = 'i',
+    text,
+    icon,
     type = 'button',
+
     onClickEvent,
 }: ActionButtonProps): JSX.Element {
     return (
@@ -20,7 +23,13 @@ function ActionButton({
             type={type}
             onClick={onClickEvent}
         >
-            {icon}
+            {text || (
+                <img
+                    className={styles['action-button__icon']}
+                    src={icon}
+                    alt="action-button"
+                />
+            )}
         </button>
     );
 }

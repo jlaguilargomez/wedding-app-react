@@ -1,5 +1,8 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
 import { IRelative } from 'modules/common/types/UserData.types';
+import Pencil from 'assets/svg/pencil.svg';
+import Eraser from 'assets/svg/eraser.svg';
+import Person from 'assets/svg/person.svg';
 import React from 'react';
 
 // TODO: Cambia el modulo
@@ -33,11 +36,11 @@ function RelativesPanel({
                             <p>{name}</p>
                             <div className="flex">
                                 <ActionButton
-                                    icon="E"
+                                    icon={Pencil}
                                     onClickEvent={() => onEditUser(username)}
                                 />{' '}
                                 <ActionButton
-                                    icon="R"
+                                    icon={Eraser}
                                     onClickEvent={() => {
                                         onRemoveUser(username);
                                     }}
@@ -49,7 +52,7 @@ function RelativesPanel({
             <div className={styles['join-form__elem']}>
                 <p>Añadir invitado</p>
                 <div className="flex">
-                    <ActionButton icon="+" onClickEvent={onAddNewUser} />
+                    <ActionButton icon={Person} onClickEvent={onAddNewUser} />
                 </div>
             </div>
         </>

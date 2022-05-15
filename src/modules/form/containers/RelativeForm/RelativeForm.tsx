@@ -33,7 +33,7 @@ function RelativeForm({
     closeModal,
     cleanRelativeData,
 }: RelativeFormProps): JSX.Element {
-    const [showAllergies, setShowAllergies] = useState<boolean>(true);
+    const [showAllergies, setShowAllergies] = useState<boolean>(false);
     const [username, setUserName] = useState<string>();
     const [relativeFormData, setRelativeFormData] =
         useState<IRelativeForm>(defaultFormData);

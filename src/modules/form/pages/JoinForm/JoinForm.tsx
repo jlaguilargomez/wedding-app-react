@@ -50,7 +50,15 @@ function JoinForm(): JSX.Element {
 
     return (
         <>
-            <h1>Únete</h1>
+            <h1>¡Únete!</h1>
+            <p className={styles['join-form__text']}>
+                Con este simple formulario nos gustaria conocer vuestras
+                preferencias alimentarias.
+            </p>
+            <p className={styles['join-form__text']}>
+                Por favor, añade tanto tus datos como los de las personas que
+                van a acompañarte en el boton de &apos;Añadir acompañante&apos;
+            </p>
             <RelativesPanel
                 relatives={userData.relatives}
                 onEditUser={(username: string) => {

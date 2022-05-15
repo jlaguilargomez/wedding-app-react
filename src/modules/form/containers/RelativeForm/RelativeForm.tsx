@@ -89,7 +89,7 @@ function RelativeForm({
 
     return (
         <>
-            <h2>Añadir invitado</h2>
+            <h2>{username ? 'Editar acompañante' : 'Añadir acompañante'}</h2>
             <form onSubmit={handleSubmit}>
                 <Input
                     name="name"

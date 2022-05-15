@@ -50,7 +50,7 @@ function RelativesPanel({
                     ))}
             </section>
             <div className={styles['join-form__elem']}>
-                <p>Añadir invitado</p>
+                <p>Añadir acompañante</p>
                 <div className="flex">
                     <ActionButton icon={Person} onClickEvent={onAddNewUser} />
                 </div>

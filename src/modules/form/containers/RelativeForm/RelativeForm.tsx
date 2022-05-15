@@ -18,6 +18,7 @@ export interface IRelativeForm {
     name: string;
     child: boolean;
     vegetarian: boolean;
+    vegan: boolean;
     allergies: string;
 }
 
@@ -25,6 +26,7 @@ const defaultFormData: IRelativeForm = {
     name: '',
     child: false,
     vegetarian: false,
+    vegan: false,
     allergies: '',
 };
 
@@ -43,9 +45,9 @@ function RelativeForm({
     useEffect(() => {
         if (relativeInfo) {
             setUserName(relativeInfo.username);
-            const { name, child, vegetarian, allergies } = relativeInfo;
+            const { name, child, vegetarian, vegan, allergies } = relativeInfo;
             setShowAllergies(!!allergies);
-            setRelativeFormData({ name, child, vegetarian, allergies });
+            setRelativeFormData({ name, child, vegetarian, vegan, allergies });
         }
 
         // TODO: Añadir error si no encuentra usuario
@@ -101,7 +103,7 @@ function RelativeForm({
                 <CheckBox
                     name="child"
                     isChecked={relativeFormData.child}
-                    label="¿Es infante?"
+                    label="¿Es niño?"
                     onChangeEvent={handleInputChange}
                 />
                 <CheckBox
@@ -111,9 +113,15 @@ function RelativeForm({
                     onChangeEvent={handleInputChange}
                 />
                 <CheckBox
+                    name="vegan"
+                    isChecked={relativeFormData.vegan}
+                    label="¿Vegano?"
+                    onChangeEvent={handleInputChange}
+                />
+                <CheckBox
                     name="isAllergic"
                     isChecked={showAllergies}
-                    label="Tienes alergias?"
+                    label="¿Alguna alergia?"
                     onChangeEvent={(_, checked) => setShowAllergies(checked)}
                 />
                 {showAllergies && (

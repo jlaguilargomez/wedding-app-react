@@ -13,7 +13,6 @@ interface ModalProps {
 const Modal = ({ children, onClickClose }: ModalProps): JSX.Element => {
     const elRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
     if (!elRef.current) {
-        console.log('se crea la modal');
         elRef.current = document.createElement('div');
     }
 

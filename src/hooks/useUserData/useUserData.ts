@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
-import { UserData } from 'modules/common/types/UserData.types';
+import { UserData } from 'types/UserData.types';
 import { auth, firestore } from 'lib/firebase/firebase.config.js';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -143,6 +143,7 @@ export const useUserData = (): IUseUserData => {
     };
 
     useEffect(() => {
+        console.log('Use Data hook');
         // turn off realtime subscription
         let unsubscribe;
 

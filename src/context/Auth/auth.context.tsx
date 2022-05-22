@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 
-import { ContextProviderProps } from 'modules/common/types/Context.types';
+import { ContextProviderProps } from 'types/Context.types';
 import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
 
 interface IAuthContext {

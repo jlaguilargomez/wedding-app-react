@@ -3,7 +3,7 @@ import NotFound from 'modules/common/pages/NotFound/NotFound';
 import Landing from 'modules/dashboard/pages/Landing/Landing';
 import Login from 'modules/login/pages/Login/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthContextProvider } from 'modules/common/context/Auth/auth.context';
+import { AuthContextProvider } from 'context/Auth/auth.context';
 import { Toaster } from 'react-hot-toast';
 import AuthGuard from 'modules/common/guards/auth.guard';
 import Main from 'modules/dashboard/pages/Main/Main';

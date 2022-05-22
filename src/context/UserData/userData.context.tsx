@@ -1,9 +1,6 @@
 import React, { createContext, useMemo, useState } from 'react';
-import {
-    ContextProviderProps,
-    ProviderValueState,
-} from 'modules/common/types/Context.types';
-import { UserData } from 'modules/common/types/UserData.types';
+import { ContextProviderProps, ProviderValueState } from 'types/Context.types';
+import { UserData } from 'types/UserData.types';
 
 interface IUserDataContext {
     userData: UserData;

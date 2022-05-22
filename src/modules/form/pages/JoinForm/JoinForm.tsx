@@ -6,14 +6,14 @@ import toast from 'react-hot-toast';
 
 import styles from 'styles/pages/JoinForm.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { useUserData } from 'modules/common/hooks/useUserData/useUserData';
+import { useUserData } from 'hooks/useUserData/useUserData';
 import Loader from 'modules/common/components/Loader/Loader';
 import Modal from 'modules/common/containers/Modal/Modal';
 
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import RelativeForm from 'modules/form/containers/RelativeForm/RelativeForm';
 import RelativesPanel from 'modules/form/components/RelativesPanel/RelativesPanel';
-import { IRelative } from 'modules/common/types/UserData.types';
+import { IRelative } from 'types/UserData.types';
 
 function JoinForm(): JSX.Element {
     const { userData, loadingUser, updateTravelData, removeRelative } =

@@ -1,5 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { auth } from 'lib/firebase/firebase.config.js';
@@ -8,6 +7,9 @@ import Input from 'modules/common/components/Input/Input';
 import Button from 'modules/common/components/Button/Button';
 
 import styles from 'styles/containers/LoginForm.module.scss';
+import handleToast from 'utils/handleToast';
+import { UserDataContext } from 'context/UserData/userData.context';
+import { takeUserFromEmail } from 'utils/utils';
 
 interface LoginForm {
     user: string;
@@ -29,6 +31,8 @@ function LoginForm(): JSX.Element {
     const { userId } = useParams();
     const navigate = useNavigate();
 
+    const { createUser } = useContext(UserDataContext);
+
     useEffect(() => {
         if (userId) {
             setForm((prevValue) => ({
@@ -49,19 +53,28 @@ function LoginForm(): JSX.Element {
 
         const { user, pass } = form;
 
-        await toast.promise(
-            auth.signInWithEmailAndPassword(
-                `${user.toLowerCase()}@bodamaruyjose.com`,
-                pass
-            ),
-            {
-                loading: 'Comprobando...',
-                success: <b>Usuario correcto</b>,
-                error: <b>Los datos introducidos no son correctos</b>,
-            }
-        );
+        try {
+            const data = await handleToast(
+                auth.signInWithEmailAndPassword(
+                    `${user.toLowerCase()}@bodamaruyjose.com`,
+                    pass
+                ),
+                {
+                    loading: 'Comprobando...',
+                    success: <b>Usuario correcto</b>,
+                    error: <b>Los datos introducidos no son correctos</b>,
+                }
+            );
 
-        navigate('/');
+            await createUser(
+                data.user?.uid,
+                takeUserFromEmail(data.user?.email)
+            );
+
+            navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

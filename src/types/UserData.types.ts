@@ -1,6 +1,6 @@
 export interface IRaffle {
     isInvolved: boolean;
-    luckyNumber: number;
+    luckyNumber?: number;
     raffleType?: string;
 }
 
@@ -19,9 +19,10 @@ export interface IRelative {
 }
 
 export interface UserData {
+    userName: string;
     byBus: IByBus;
     raffle: IRaffle;
-    isAdmin: boolean;
+    isAdmin?: boolean;
     relatives: Array<IRelative>;
     aditionalInfo: string;
 }

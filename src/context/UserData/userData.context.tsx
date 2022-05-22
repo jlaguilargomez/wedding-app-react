@@ -1,28 +1,33 @@
-import React, { createContext, useMemo, useState } from 'react';
-import { ContextProviderProps, ProviderValueState } from 'types/Context.types';
+import { useUserData } from 'hooks/useUserData/useUserData';
+import React, { createContext, useMemo } from 'react';
+import { ContextProviderProps } from 'types/Context.types';
 import { UserData } from 'types/UserData.types';
 
 interface IUserDataContext {
-    userData: UserData;
+    userData: UserData | null;
+    // loadingUser: boolean;
+    createUser: (
+        userID: string | undefined,
+        userName: string | null | undefined
+    ) => Promise<void>;
+    // updateTravelData: (name: string, value: boolean) => Promise<void | null>;
+    // addNewRelative: (relativeInfo: IRelativeForm) => Promise<void | null>;
+    // removeRelative: (username: string) => Promise<void | null>;
+    // editRelative: (relativeInfo: any) => Promise<void | null>;
 }
 
-export const UserDataContext = createContext<
-    ProviderValueState<IUserDataContext>
->({} as ProviderValueState<IUserDataContext>);
+export const UserDataContext = createContext<IUserDataContext>(
+    {} as IUserDataContext
+);
 
-const initialState = {};
+// const initialState = {};
 
 export function UserDataProvider({
     children,
 }: ContextProviderProps): JSX.Element {
-    const [state, setState] = useState<IUserDataContext>(
-        initialState as IUserDataContext
-    );
+    const { userData, createUser } = useUserData();
 
-    const contextValue = useMemo(
-        () => ({ state, setState }),
-        [state, setState]
-    );
+    const contextValue = useMemo(() => ({ userData, createUser }), [userData]);
 
     return (
         <UserDataContext.Provider value={contextValue}>

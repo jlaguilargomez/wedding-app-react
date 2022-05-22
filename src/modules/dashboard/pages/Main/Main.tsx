@@ -1,7 +1,7 @@
 import ActionButton from 'modules/common/components/NavButton/NavButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import UsMain from 'assets/img/us_main.jpg';
 
@@ -31,6 +31,12 @@ function Main(): JSX.Element {
 
             <Button text="¡Me apunto!" onClickEvent={() => navigate('/join')} />
             <Button text="Info" onClickEvent={() => navigate('/info')} />
+            <Button
+                text="¡Comparte tus fotos!"
+                onClickEvent={() =>
+                    window.open('https://photos.app.goo.gl/fK4LxRrcL3xoiMji8')
+                }
+            />
             <Button text="Sorteo..." />
             <ActionButton position="back" onClickEvent={() => navigate('/')} />
         </>

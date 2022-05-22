@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { AuthContext } from '../context/Auth/auth.context';
+import { AuthContext } from '../../../context/Auth/auth.context';
 
 interface AuthGuardProps {
     children: React.ReactElement;

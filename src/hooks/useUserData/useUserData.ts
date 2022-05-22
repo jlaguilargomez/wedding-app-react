@@ -1,14 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
-import { UserData } from 'modules/common/types/UserData.types';
+import { UserData } from 'types/UserData.types';
 import { auth, firestore } from 'lib/firebase/firebase.config.js';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IRelativeForm } from 'modules/form/containers/RelativeForm/RelativeForm';
 
+const defaultUserData: UserData = {
+    userName: '',
+    byBus: {
+        onArrive: false,
+        onOutward: false,
+    },
+    raffle: {
+        isInvolved: false,
+    },
+    relatives: [],
+    aditionalInfo: '',
+};
+
 interface IUseUserData {
     userData: UserData | null;
     loadingUser: boolean;
+    createUser: (
+        userID: string | undefined,
+        userName: string | null | undefined
+    ) => Promise<void>;
     updateTravelData: (name: string, value: boolean) => Promise<void | null>;
     addNewRelative: (relativeInfo: IRelativeForm) => Promise<void | null>;
     removeRelative: (username: string) => Promise<void | null>;
@@ -20,6 +37,19 @@ export const useUserData = (): IUseUserData => {
 
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loadingUser, setLoadingUser] = useState<boolean>(true);
+
+    const createUser = async (
+        userID: string | undefined,
+        userName: string | null | undefined
+    ): Promise<void> => {
+        const ref = firestore.doc(`users/${userID}`);
+
+        const batch = firestore.batch();
+
+        batch.set(ref, { ...defaultUserData, userName });
+
+        await batch.commit();
+    };
 
     const updateTravelData = async (
         name: string,
@@ -143,6 +173,7 @@ export const useUserData = (): IUseUserData => {
     };
 
     useEffect(() => {
+        console.log('Use Data hook');
         // turn off realtime subscription
         let unsubscribe;
 
@@ -163,6 +194,7 @@ export const useUserData = (): IUseUserData => {
     return {
         userData,
         loadingUser,
+        createUser,
         updateTravelData,
         addNewRelative,
         removeRelative,

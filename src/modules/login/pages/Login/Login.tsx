@@ -4,7 +4,7 @@ import cn from 'classnames';
 import LoginForm from 'modules/login/containers/LoginForm/LoginForm';
 
 import styles from 'styles/pages/LoginPage.module.scss';
-import { AuthContext } from 'modules/common/context/Auth/auth.context';
+import { AuthContext } from 'context/Auth/auth.context';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from 'modules/common/components/Loader/Loader';
 

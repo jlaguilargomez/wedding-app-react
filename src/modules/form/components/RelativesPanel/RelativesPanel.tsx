@@ -1,5 +1,5 @@
 import ActionButton from 'modules/common/components/ActionButton/ActionButton';
-import { IRelative } from 'modules/common/types/UserData.types';
+import { IRelative } from 'types/UserData.types';
 import Pencil from 'assets/svg/pencil.svg';
 import Eraser from 'assets/svg/eraser.svg';
 import Person from 'assets/svg/person.svg';

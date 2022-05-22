@@ -2,8 +2,8 @@
 import Button from 'modules/common/components/Button/Button';
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import Input from 'modules/common/components/Input/Input';
-import { useUserData } from 'modules/common/hooks/useUserData/useUserData';
-import { IRelative } from 'modules/common/types/UserData.types';
+import { useUserData } from 'hooks/useUserData/useUserData';
+import { IRelative } from 'types/UserData.types';
 import React, { FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 

@@ -24,7 +24,6 @@ function JoinForm(): JSX.Element {
         IRelative | undefined
     >();
     const [showUserModal, setShowUserModal] = useState<boolean>(false);
-    const navigate = useNavigate();
 
     const toggleUserModal = (): void => setShowUserModal((prev) => !prev);
 
@@ -50,7 +49,6 @@ function JoinForm(): JSX.Element {
 
     return (
         <>
-            <h1>¡Únete!</h1>
             <p className={styles['join-form__text']}>
                 Con este simple formulario nos gustaria conocer vuestras
                 preferencias alimentarias.

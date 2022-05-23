@@ -11,7 +11,6 @@ function Main(): JSX.Element {
 
     return (
         <>
-            <h1>¡Nos casamos!</h1>
             <img className={styles.main__img} src={UsMain} alt="nosotros" />
             <InfoCard>
                 <div>

@@ -37,7 +37,6 @@ function Info(): JSX.Element {
 
     return (
         <>
-            <h1>Info</h1>
             <section className={styles.info__img} />
             <div className={styles['info__card-container']}>
                 <InfoCard>

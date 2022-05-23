@@ -63,10 +63,6 @@ function Info(): JSX.Element {
                 onClickEvent={() => openSpecificModal(ModalInfo.CALENDAR)}
             />
 
-            <ActionButton
-                position="back"
-                onClickEvent={() => navigate('/main')}
-            />
             {showModal && (
                 <Modal onClickClose={toggleModal}>
                     {modalInfoData[modalInfo]}

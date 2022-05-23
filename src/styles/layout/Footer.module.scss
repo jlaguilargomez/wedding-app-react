@@ -1,0 +1,14 @@
+@import '../abstracts/mixins';
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    // border: 1px dotted red;
+    height: 8vh;
+    width: 100%;
+    background-color: var(--light-pink);
+    @include shadow();
+}

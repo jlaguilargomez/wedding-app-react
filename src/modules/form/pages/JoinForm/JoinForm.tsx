@@ -105,7 +105,6 @@ function JoinForm(): JSX.Element {
                     />
                 </Modal>
             )}
-            <NavButton position="back" onClickEvent={() => navigate('/main')} />
         </>
     );
 }

@@ -1,4 +1,3 @@
-import ActionButton from 'modules/common/components/NavButton/NavButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import React from 'react';
@@ -38,7 +37,6 @@ function Main(): JSX.Element {
                 }
             />
             <Button text="Sorteo..." />
-            <ActionButton position="back" onClickEvent={() => navigate('/')} />
         </>
     );
 }

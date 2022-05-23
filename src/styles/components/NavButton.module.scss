@@ -1,6 +1,9 @@
+@import '../abstracts/mixins';
+
 .nav-button {
-    position: fixed;
-    align-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 100%;
     background: var(--light-brown);
     color: var(--big-brown);
@@ -11,22 +14,14 @@
     font-size: 2.5rem;
     transition: 0.2s all;
 
-    &--next {
-        right: 20px;
-
-        &:active {
-            transform: translateY(2px) scale(0.9);
-            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
-        }
+    &__icon {
+        height: 20px;
+        width: 20px;
     }
+}
 
-    &--back {
-        left: 20px;
-        transform: rotate(180deg);
-
-        &:active {
-            transform: translateY(2px) rotate(180deg) scale(0.9);
-            box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.3);
-        }
+@include respond(tablet) {
+    .nav-button {
+        position: static;
     }
 }

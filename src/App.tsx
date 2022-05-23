@@ -10,6 +10,8 @@ import Main from 'modules/dashboard/pages/Main/Main';
 import Info from 'modules/info/pages/Info/Info';
 import JoinForm from 'modules/form/pages/JoinForm/JoinForm';
 import { UserDataProvider } from 'context/UserData/userData.context';
+import Header from 'modules/common/layout/Header/Header';
+import Footer from 'modules/common/layout/Footer/Footer';
 
 function App(): JSX.Element {
     return (
@@ -30,7 +32,11 @@ function App(): JSX.Element {
                                 path="/main"
                                 element={
                                     <AuthGuard>
-                                        <Main />
+                                        <>
+                                            <Header />
+                                            <Main />
+                                            <Footer />
+                                        </>
                                     </AuthGuard>
                                 }
                             />
@@ -38,7 +44,11 @@ function App(): JSX.Element {
                                 path="/info"
                                 element={
                                     <AuthGuard>
-                                        <Info />
+                                        <>
+                                            <Header />
+                                            <Info />
+                                            <Footer />
+                                        </>
                                     </AuthGuard>
                                 }
                             />
@@ -46,7 +56,11 @@ function App(): JSX.Element {
                                 path="/join"
                                 element={
                                     <AuthGuard>
-                                        <JoinForm />
+                                        <>
+                                            <Header />
+                                            <JoinForm />
+                                            <Footer />
+                                        </>
                                     </AuthGuard>
                                 }
                             />

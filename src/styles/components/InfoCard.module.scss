@@ -5,13 +5,8 @@
     border-radius: 12px;
     text-align: center;
     padding: 2rem 1.8rem;
-    width: 90%;
     margin: 1.2rem;
     line-height: 2.4rem;
     letter-spacing: 0.1rem;
     @include shadow();
-
-    @include respond(tablet) {
-        width: 70%;
-    }
 }

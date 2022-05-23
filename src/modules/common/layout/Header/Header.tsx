@@ -11,10 +11,18 @@ function Header(): JSX.Element {
     const { pathname } = useLocation();
 
     if (!pathname) {
-        return <h1>Boda</h1>;
+        return (
+            <header>
+                <h1>Boda</h1>
+            </header>
+        );
     }
 
-    return <h1>{ROUTE_MAPPER[pathname]}</h1>;
+    return (
+        <header>
+            <h1>{ROUTE_MAPPER[pathname]}</h1>
+        </header>
+    );
 }
 
 export default Header;

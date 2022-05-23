@@ -6,7 +6,6 @@ import Calendar from 'modules/info/containers/Calendar/Calendar';
 import Contact from 'modules/info/containers/Contact/Contact';
 import Place from 'modules/info/containers/Place/Place';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import styles from 'styles/pages/Info.module.scss';
 
@@ -25,7 +24,6 @@ const modalInfoData = {
 function Info(): JSX.Element {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [modalInfo, setModalInfo] = useState<ModalInfo>(ModalInfo.CONTACT);
-    const navigate = useNavigate();
 
     const toggleModal = (): void =>
         setShowModal((prevValue: boolean) => !prevValue);

@@ -1,6 +1,6 @@
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UsMain from 'assets/img/us_main.jpg';
 
@@ -23,7 +23,10 @@ function Main(): JSX.Element {
                 </div>
             </InfoCard>
 
-            <Button text="¡Me apunto!" onClickEvent={() => navigate('/join')} />
+            <Button
+                text="¡Confirmar asistencia!"
+                onClickEvent={() => navigate('/join')}
+            />
             <Button text="Info" onClickEvent={() => navigate('/info')} />
             <Button
                 text="¡Comparte tus fotos!"

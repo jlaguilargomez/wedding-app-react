@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 
-import NavButton from 'modules/common/components/NavButton/NavButton';
-
 import toast from 'react-hot-toast';
 
 import styles from 'styles/pages/JoinForm.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { useUserData } from 'hooks/useUserData/useUserData';
 import Loader from 'modules/common/components/Loader/Loader';
 import Modal from 'modules/common/containers/Modal/Modal';
@@ -14,6 +11,8 @@ import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import RelativeForm from 'modules/form/containers/RelativeForm/RelativeForm';
 import RelativesPanel from 'modules/form/components/RelativesPanel/RelativesPanel';
 import { IRelative } from 'types/UserData.types';
+import handleToast from 'utils/handleToast';
+import TextArea from 'modules/common/components/TextArea/TextArea';
 
 function JoinForm(): JSX.Element {
     const { userData, loadingUser, updateTravelData, removeRelative } =
@@ -31,8 +30,7 @@ function JoinForm(): JSX.Element {
         param: string,
         newData: boolean
     ): Promise<void> => {
-        // TODO: Seria bueno crear un componente que se encargara de esto
-        await toast.promise(updateTravelData(param, newData), {
+        await handleToast(updateTravelData(param, newData), {
             loading: 'Actualizando...',
             success: <b>Datos actualizados</b>,
             error: <b>No se han podido actualizar los datos</b>,
@@ -44,19 +42,20 @@ function JoinForm(): JSX.Element {
     }
 
     if (!userData) {
-        return <h1>No hay datos de usuario!</h1>;
+        return <h2>¡No hay datos de usuario!</h2>;
     }
 
     return (
         <>
             <p className={styles['join-form__text']}>
-                Con este simple formulario nos gustaria conocer vuestras
-                preferencias alimentarias.
+                Esto es un simple formulario para que introduzcas los datos de
+                los que vais a venir a la boda.
             </p>
             <p className={styles['join-form__text']}>
-                Por favor, añade tanto tus datos como los de las personas que
-                van a acompañarte en el boton de &apos;Añadir acompañante&apos;
+                Por favor, añade los datos de tantos como seais incluyéndote a
+                ti mismo.
             </p>
+            <p className={styles['join-form__text']}>¡Gracias!</p>
             <RelativesPanel
                 relatives={userData.relatives}
                 onEditUser={(username: string) => {
@@ -71,11 +70,11 @@ function JoinForm(): JSX.Element {
                 onAddNewUser={toggleUserModal}
             />
             <form className={styles['join-form__family-info']}>
-                <p>¿Necesitas bus?</p>
+                <p>¿Necesitarías autobús?</p>
                 <CheckBox
                     name="onArrive"
                     isChecked={userData.byBus ? userData.byBus.onArrive : false}
-                    label="Ida"
+                    label="Bus a la ida"
                     onChangeEvent={updateUserData}
                 />
                 <CheckBox
@@ -83,16 +82,17 @@ function JoinForm(): JSX.Element {
                     isChecked={
                         userData.byBus ? userData.byBus.onOutward : false
                     }
-                    label="Vuelta"
+                    label="Bus a la vuelta"
                     onChangeEvent={updateUserData}
                 />
 
+                <p>¿Necesitarías autobús?</p>
                 {/* TODO: Dale formato a esto y muestralo */}
-                {/* <TextArea
+                <TextArea
                     label="Texto"
                     content={userData.aditionalInfo}
                     onTextAreaChange={console.log}
-                /> */}
+                />
             </form>
             {showUserModal && (
                 <Modal onClickClose={toggleUserModal}>

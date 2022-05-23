@@ -1,25 +1,30 @@
 import React from 'react';
 
+import styles from 'styles/components/TextArea.module.scss';
+
 interface TextAreaProps {
-    label: string;
-    content?: string;
+    name: string;
+    value: string;
+    labelText?: string;
     onTextAreaChange: (text: string) => void;
 }
 
 function TextArea({
-    label,
-    content,
+    name,
+    value,
+    labelText,
     onTextAreaChange,
 }: TextAreaProps): JSX.Element {
     return (
-        <label htmlFor="additionalInfo">
-            {label}
+        <div className={styles['text-area__container']}>
+            {labelText ?? <label htmlFor={name}>{labelText}</label>}
             <textarea
-                id="additionalInfo"
-                value={content}
+                id={name}
+                value={value}
+                className={styles['text-area']}
                 onChange={(e) => onTextAreaChange(e.target.value)}
             />
-        </label>
+        </div>
     );
 }
 

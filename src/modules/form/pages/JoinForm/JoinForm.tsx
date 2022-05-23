@@ -86,11 +86,11 @@ function JoinForm(): JSX.Element {
                     onChangeEvent={updateUserData}
                 />
 
-                <p>¿Necesitarías autobús?</p>
                 {/* TODO: Dale formato a esto y muestralo */}
                 <TextArea
-                    label="Texto"
-                    content={userData.aditionalInfo}
+                    value={userData.aditionalInfo}
+                    name="additional"
+                    labelText="Si quieres añadir algo, ¡este es el sitio!"
                     onTextAreaChange={console.log}
                 />
             </form>

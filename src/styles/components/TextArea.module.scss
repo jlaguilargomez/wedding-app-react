@@ -1,0 +1,49 @@
+@import '../abstracts/mixins';
+
+.text-area__container {
+    margin: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.label {
+    margin-bottom: 1rem;
+}
+
+.text-area {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--big-brown);
+    box-sizing: border-box;
+    border-radius: 12px;
+    outline: none;
+    height: 20rem;
+    font-size: 2.5rem;
+    transition: all 0.1s;
+
+    &:focus {
+        border: 2px solid var(--big-brown);
+        -webkit-box-shadow: inset 0.5px 0.5px 5px 0.5px #5e5e5e;
+        box-shadow: inset 0.5px 0.5px 5px 0.5px #5e5e5e;
+    }
+
+    &:visited {
+        padding: 3rem;
+    }
+
+    &:not(:focus):not(:placeholder-shown):invalid {
+        border: 2px solid var(--passion-red);
+        background: #ff7f7f40;
+
+        & ~ .error-text {
+            display: inline-block;
+        }
+    }
+}
+
+.error-text {
+    display: none;
+    color: var(--passion-red);
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem;
+}

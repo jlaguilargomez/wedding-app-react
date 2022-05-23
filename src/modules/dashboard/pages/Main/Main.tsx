@@ -15,14 +15,10 @@ function Main(): JSX.Element {
             <InfoCard>
                 <div>
                     <p>
-                        ¡El próximo <b>día 16 de septiembre</b> nos casamos y
-                        queremos que formes parte de este día tan especial para
-                        nosotros!
-                    </p>
-                    <br />
-                    <p>
-                        Te invitamos a acompañarnos y a disfrutar del evento que
-                        trendrá en <b>Finca Monteviejo (Madrid)</b>.
+                        ¡El próximo <b>día 16 de septiembre a las 18.30</b> nos
+                        casamos en <b>Finca Monteviejo (Madrid),</b> y nos
+                        encantaría contar contigo para{' '}
+                        <b>pasarlo genial en este evento tan especial</b>!
                     </p>
                 </div>
             </InfoCard>

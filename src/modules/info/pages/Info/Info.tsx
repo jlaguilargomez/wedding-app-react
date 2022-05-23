@@ -34,15 +34,17 @@ function Info(): JSX.Element {
     };
 
     return (
-        <>
+        <main className={styles['info-container']}>
             <section className={styles.info__img} />
             <div className={styles['info__card-container']}>
                 <InfoCard>
                     <p>
                         Tanto la ceremonia como el posterior convite, cena y
-                        fiesta tendrán lugar en la Finca Castillo de Monteviejo
-                        (km. 37 de la A-1) a las 18.30 de la tarde del 16 de
-                        septiembre
+                        fiesta tendrán lugar en la{' '}
+                        <b>
+                            Finca Castillo de Monteviejo (km. 37 de la A-1) a
+                            las 18.30 de la tarde del 16 de septiembre
+                        </b>
                     </p>
                 </InfoCard>
             </div>
@@ -65,7 +67,7 @@ function Info(): JSX.Element {
                     {modalInfoData[modalInfo]}
                 </Modal>
             )}
-        </>
+        </main>
     );
 }
 

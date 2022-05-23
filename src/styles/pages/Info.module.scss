@@ -1,5 +1,11 @@
 @import '../abstracts/mixins';
 
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .info {
     &__img {
         width: 100%;

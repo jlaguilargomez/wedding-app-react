@@ -10,7 +10,7 @@ function Main(): JSX.Element {
     const navigate = useNavigate();
 
     return (
-        <>
+        <main className={styles['main-container']}>
             <img className={styles.main__img} src={UsMain} alt="nosotros" />
             <InfoCard>
                 <div>
@@ -35,7 +35,7 @@ function Main(): JSX.Element {
                 }
             />
             <Button text="Sorteo..." />
-        </>
+        </main>
     );
 }
 

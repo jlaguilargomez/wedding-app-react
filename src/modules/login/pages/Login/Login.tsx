@@ -31,10 +31,10 @@ function Login(): JSX.Element {
     }
 
     return (
-        <>
-            <h1 className={cn(styles['login-page'], 'title')}>¡Bienvenid@!</h1>
+        <div className={styles['login-page']}>
+            <h1 className={cn('title')}>¡Bienvenid@!</h1>
             <LoginForm />
-        </>
+        </div>
     );
 }
 

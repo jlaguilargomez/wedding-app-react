@@ -5,8 +5,7 @@ import Eraser from 'assets/svg/eraser.svg';
 import Person from 'assets/svg/person.svg';
 import React from 'react';
 
-// TODO: Cambia el modulo
-import styles from 'styles/pages/JoinForm.module.scss';
+import styles from 'styles/components/RelativesPanel.module.scss';
 
 interface RepativesPanelProps {
     relatives: Array<IRelative>;
@@ -26,11 +25,11 @@ function RelativesPanel({
     }
     return (
         <>
-            <section className={styles['join-form__list']}>
+            <section className={styles['relatives-panel__list']}>
                 {relatives &&
                     relatives.map(({ name, username }) => (
                         <div
-                            className={styles['join-form__elem']}
+                            className={styles['relatives-panel__elem']}
                             key={username}
                         >
                             <p>{name}</p>
@@ -49,7 +48,7 @@ function RelativesPanel({
                         </div>
                     ))}
             </section>
-            <div className={styles['join-form__elem']}>
+            <div className={styles['relatives-panel__add']}>
                 <p>Añadir acompañante</p>
                 <div className="flex">
                     <ActionButton icon={Person} onClickEvent={onAddNewUser} />

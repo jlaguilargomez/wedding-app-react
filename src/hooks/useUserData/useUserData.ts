@@ -27,6 +27,7 @@ interface IUseUserData {
         userName: string | null | undefined
     ) => Promise<void>;
     updateTravelData: (name: string, value: boolean) => Promise<void | null>;
+    updateAdditionalInfo: (newValue: string) => Promise<void | null>;
     addNewRelative: (relativeInfo: IRelativeForm) => Promise<void | null>;
     removeRelative: (username: string) => Promise<void | null>;
     editRelative: (relativeInfo: any) => Promise<void | null>;
@@ -69,6 +70,18 @@ export const useUserData = (): IUseUserData => {
                 });
         }
 
+        return null;
+    };
+
+    const updateAdditionalInfo = async (
+        newValue: string
+    ): Promise<void | null> => {
+        if (user && userData) {
+            return firestore
+                .collection('users')
+                .doc(user.uid)
+                .update({ aditionalInfo: newValue });
+        }
         return null;
     };
 
@@ -196,6 +209,7 @@ export const useUserData = (): IUseUserData => {
         loadingUser,
         createUser,
         updateTravelData,
+        updateAdditionalInfo,
         addNewRelative,
         removeRelative,
         editRelative,

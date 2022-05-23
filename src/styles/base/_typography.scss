@@ -17,6 +17,15 @@
     src: local('Roboto Slab'),
         url('../../assets/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf')
             format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Roboto Slab';
+    src: local('Roboto Slab'),
+        url('../../assets/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf')
+            format('truetype');
+    font-weight: bold;
 }
 
 html {

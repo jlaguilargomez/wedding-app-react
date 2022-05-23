@@ -1,0 +1,25 @@
+.relatives-panel {
+    &__list {
+        width: 100%;
+        padding: 2rem;
+        border: 2px solid white;
+        border-radius: 1rem;
+        background: var(--light-brown);
+    }
+
+    &__elem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+
+    &__add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+}

@@ -60,9 +60,9 @@ function LoginForm(): JSX.Element {
                     pass
                 ),
                 {
-                    loading: 'Comprobando...',
-                    success: <b>Usuario correcto</b>,
-                    error: <b>Los datos introducidos no son correctos</b>,
+                    loading: 'Comprobando usuario...',
+                    success: <b>¡Adelante!</b>,
+                    error: <b>Comprueba tu usuario y contraseña</b>,
                 }
             );
 

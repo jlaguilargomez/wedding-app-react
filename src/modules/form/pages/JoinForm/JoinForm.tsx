@@ -1,41 +1,58 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 
-import NavButton from 'modules/common/components/NavButton/NavButton';
-
-import toast from 'react-hot-toast';
-
-import styles from 'styles/pages/JoinForm.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { useUserData } from 'hooks/useUserData/useUserData';
 import Loader from 'modules/common/components/Loader/Loader';
 import Modal from 'modules/common/containers/Modal/Modal';
+
+import cn from 'classnames';
 
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import RelativeForm from 'modules/form/containers/RelativeForm/RelativeForm';
 import RelativesPanel from 'modules/form/components/RelativesPanel/RelativesPanel';
 import { IRelative } from 'types/UserData.types';
+import handleToast from 'utils/handleToast';
+import TextArea from 'modules/common/components/TextArea/TextArea';
+import Button from 'modules/common/components/Button/Button';
+
+import styles from 'styles/pages/JoinForm.module.scss';
 
 function JoinForm(): JSX.Element {
-    const { userData, loadingUser, updateTravelData, removeRelative } =
-        useUserData();
+    const {
+        userData,
+        loadingUser,
+        updateTravelData,
+        removeRelative,
+        updateAdditionalInfo,
+    } = useUserData();
 
-    // TODO: Tipa esto
     const [relativeToEdit, setRelativeToEdit] = useState<
         IRelative | undefined
     >();
     const [showUserModal, setShowUserModal] = useState<boolean>(false);
-    const navigate = useNavigate();
+    const [additionalContent, setAdditionalContent] = useState<string>('');
+
+    useEffect(() => {
+        setAdditionalContent(userData?.aditionalInfo || '');
+    }, [userData]);
 
     const toggleUserModal = (): void => setShowUserModal((prev) => !prev);
+
+    const onSubmitHandler = async (e: FormEvent): Promise<void> => {
+        e.preventDefault();
+        await handleToast(updateAdditionalInfo(additionalContent), {
+            loading: 'Enviando comentario...',
+            success: <b>¡Recibido!</b>,
+            error: <b>No se han podido actualizar los datos</b>,
+        });
+    };
 
     const updateUserData = async (
         param: string,
         newData: boolean
     ): Promise<void> => {
-        // TODO: Seria bueno crear un componente que se encargara de esto
-        await toast.promise(updateTravelData(param, newData), {
-            loading: 'Actualizando...',
-            success: <b>Datos actualizados</b>,
+        await handleToast(updateTravelData(param, newData), {
+            loading: 'Actualizando los datos del bus...',
+            success: <b>¡Recibido!</b>,
             error: <b>No se han podido actualizar los datos</b>,
         });
     };
@@ -45,57 +62,75 @@ function JoinForm(): JSX.Element {
     }
 
     if (!userData) {
-        return <h1>No hay datos de usuario!</h1>;
+        return <h2>¡No hay datos de usuario!</h2>;
     }
 
     return (
-        <>
-            <h1>¡Únete!</h1>
-            <p className={styles['join-form__text']}>
-                Con este simple formulario nos gustaria conocer vuestras
-                preferencias alimentarias.
-            </p>
-            <p className={styles['join-form__text']}>
-                Por favor, añade tanto tus datos como los de las personas que
-                van a acompañarte en el boton de &apos;Añadir acompañante&apos;
-            </p>
-            <RelativesPanel
-                relatives={userData.relatives}
-                onEditUser={(username: string) => {
-                    const relativeSelected = userData.relatives.filter(
-                        (rel) => rel.username === username
-                    )[0];
-                    setRelativeToEdit(relativeSelected);
+        <main className={styles['join-form__container']}>
+            <section className={cn(styles['join-form__section'])}>
+                <p className={styles['join-form__text']}>
+                    Esto es un simple formulario para que introduzcas los datos
+                    de los que vais a venir a la boda.
+                </p>
+                <p className={styles['join-form__text']}>
+                    Por favor, añade los datos de tantos como seais incluyéndote
+                    a ti mismo.
+                </p>
+                <p className={styles['join-form__text']}>¡Gracias!</p>
+                <RelativesPanel
+                    relatives={userData.relatives}
+                    onEditUser={(username: string) => {
+                        const relativeSelected = userData.relatives.filter(
+                            (rel) => rel.username === username
+                        )[0];
+                        setRelativeToEdit(relativeSelected);
 
-                    toggleUserModal();
-                }}
-                onRemoveUser={removeRelative}
-                onAddNewUser={toggleUserModal}
-            />
-            <form className={styles['join-form__family-info']}>
-                <p>¿Necesitas bus?</p>
-                <CheckBox
-                    name="onArrive"
-                    isChecked={userData.byBus ? userData.byBus.onArrive : false}
-                    label="Ida"
-                    onChangeEvent={updateUserData}
+                        toggleUserModal();
+                    }}
+                    onRemoveUser={removeRelative}
+                    onAddNewUser={toggleUserModal}
                 />
-                <CheckBox
-                    name="onOutward"
-                    isChecked={
-                        userData.byBus ? userData.byBus.onOutward : false
-                    }
-                    label="Vuelta"
-                    onChangeEvent={updateUserData}
-                />
+            </section>
 
-                {/* TODO: Dale formato a esto y muestralo */}
-                {/* <TextArea
-                    label="Texto"
-                    content={userData.aditionalInfo}
-                    onTextAreaChange={console.log}
-                /> */}
-            </form>
+            <section className={cn(styles['join-form__section'])}>
+                <p className={styles['join-form__text']}>
+                    ¿Necesitáis autobús?
+                </p>
+                <div>
+                    <CheckBox
+                        name="onArrive"
+                        isChecked={
+                            userData.byBus ? userData.byBus.onArrive : false
+                        }
+                        label="Bus a la ida"
+                        onChangeEvent={updateUserData}
+                    />
+                    <CheckBox
+                        name="onOutward"
+                        isChecked={
+                            userData.byBus ? userData.byBus.onOutward : false
+                        }
+                        label="Bus a la vuelta"
+                        onChangeEvent={updateUserData}
+                    />
+                </div>
+            </section>
+
+            <section className={cn(styles['join-form__section'])}>
+                <form
+                    className={styles['join-form__family-info']}
+                    onSubmit={onSubmitHandler}
+                >
+                    <TextArea
+                        value={additionalContent}
+                        name="additional"
+                        labelText="Si quieres añadir algo, ¡este es el sitio!"
+                        onTextAreaChange={setAdditionalContent}
+                    />
+
+                    <Button type="submit" text="Enviar comentario" />
+                </form>
+            </section>
             {showUserModal && (
                 <Modal onClickClose={toggleUserModal}>
                     <RelativeForm
@@ -105,8 +140,7 @@ function JoinForm(): JSX.Element {
                     />
                 </Modal>
             )}
-            <NavButton position="back" onClickEvent={() => navigate('/main')} />
-        </>
+        </main>
     );
 }
 

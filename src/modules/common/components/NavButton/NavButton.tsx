@@ -5,24 +5,26 @@ import cn from 'classnames';
 import styles from 'styles/components/NavButton.module.scss';
 
 interface NavButtonProps {
-    position?: 'next' | 'back';
+    icon?: string;
     onClickEvent?: () => void;
 }
 
 function NavButton({
-    position = 'next',
+    icon,
+
     onClickEvent,
 }: NavButtonProps): JSX.Element {
     return (
         <button
             type="button"
-            className={cn(
-                styles['nav-button'],
-                styles[`nav-button--${position}`]
-            )}
+            className={cn(styles['nav-button'])}
             onClick={onClickEvent}
         >
-            &gt;
+            <img
+                className={styles['nav-button__icon']}
+                src={icon}
+                alt="action-button"
+            />
         </button>
     );
 }

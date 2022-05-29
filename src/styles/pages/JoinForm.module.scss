@@ -1,9 +1,13 @@
 .join-form {
     &__section {
-        padding: 2rem 0;
+        margin-bottom: 3rem;
     }
 
     &__text {
-        margin: 1.2rem;
+        margin: 1.4rem;
+    }
+
+    &__button {
+        text-align: center;
     }
 }

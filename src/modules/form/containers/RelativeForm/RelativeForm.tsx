@@ -72,13 +72,12 @@ function RelativeForm({
                     username,
                 }),
                 {
-                    loading: 'Editando invitado...',
+                    loading: 'Editando datos...',
                     success: <b>Acompañante editado</b>,
-                    error: <b>No se ha podido crear</b>,
+                    error: <b>No se ha podido editar</b>,
                 }
             );
         } else {
-            // TODO: Seria bueno crear un componente que se encargara de esto
             await toast.promise(addNewRelative(relativeFormData), {
                 loading: 'Creando nuevo invitado...',
                 success: <b>Nuevo acompañante añadido</b>,
@@ -91,7 +90,9 @@ function RelativeForm({
 
     return (
         <>
-            <h2>{username ? 'Editar acompañante' : 'Añadir acompañante'}</h2>
+            <h2 className="secondary-title">
+                {username ? 'Editar datos' : 'Añadir persona'}
+            </h2>
             <form onSubmit={handleSubmit}>
                 <Input
                     name="name"
@@ -103,7 +104,7 @@ function RelativeForm({
                 <CheckBox
                     name="child"
                     isChecked={relativeFormData.child}
-                    label="¿Es niño?"
+                    label="¿Es niñ@?"
                     onChangeEvent={handleInputChange}
                 />
                 <CheckBox
@@ -125,7 +126,6 @@ function RelativeForm({
                     onChangeEvent={(_, checked) => setShowAllergies(checked)}
                 />
                 {showAllergies && (
-                    // TODO: quiza mejor un textarea aqui
                     <Input
                         name="allergies"
                         labelText="Introduce tus alergias"

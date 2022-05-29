@@ -57,6 +57,14 @@ function JoinForm(): JSX.Element {
         });
     };
 
+    const handleRemoveRelative = async (username: string): Promise<void> => {
+        await handleToast(removeRelative(username), {
+            loading: 'Eliminando usuario de la lista...',
+            success: <b>¡Eliminado!</b>,
+            error: <b>No se han podido eliminar al usuario</b>,
+        });
+    };
+
     if (loadingUser) {
         return <Loader show />;
     }
@@ -82,7 +90,7 @@ function JoinForm(): JSX.Element {
 
                         toggleUserModal();
                     }}
-                    onRemoveUser={removeRelative}
+                    onRemoveUser={handleRemoveRelative}
                     onAddNewUser={toggleUserModal}
                 />
             </section>

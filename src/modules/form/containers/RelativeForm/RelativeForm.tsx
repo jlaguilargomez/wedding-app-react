@@ -128,7 +128,7 @@ function RelativeForm({
                 {showAllergies && (
                     <Input
                         name="allergies"
-                        labelText="Introduce tus alergias"
+                        labelText="Introduce las alergias"
                         value={relativeFormData.allergies}
                         onChangeEvent={handleInputChange}
                         required={showAllergies}

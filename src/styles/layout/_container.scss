@@ -21,14 +21,14 @@
         overflow: auto;
         min-height: unset;
         height: 90vh;
-        width: 70vw;
+        width: 50vw;
         -webkit-box-shadow: 7px 7px 11px -5px #000000;
         box-shadow: 7px 4px 11px -5px #000000;
     }
 
     @include respond(desktop) {
         height: 70vh;
-        width: 80vw;
+        width: 60vw;
         padding: 4rem;
     }
 }

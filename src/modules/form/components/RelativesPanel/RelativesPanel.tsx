@@ -3,9 +3,11 @@ import { IRelative } from 'types/UserData.types';
 import Pencil from 'assets/svg/pencil.svg';
 import Eraser from 'assets/svg/eraser.svg';
 import Person from 'assets/svg/person.svg';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from 'styles/components/RelativesPanel.module.scss';
+import Modal from 'modules/common/containers/Modal/Modal';
+import Button from 'modules/common/components/Button/Button';
 
 interface RepativesPanelProps {
     relatives: Array<IRelative>;
@@ -20,8 +22,13 @@ function RelativesPanel({
     onRemoveUser,
     onAddNewUser,
 }: RepativesPanelProps): JSX.Element {
+    const [showModal, setShowModal] = useState<boolean>(false);
+
+    const toggleModal = (): void =>
+        setShowModal((prevValue: boolean) => !prevValue);
+
     if (!relatives?.length) {
-        <h1>No hay datos de familiares</h1>;
+        <h1>No hay datos de asistentes</h1>;
     }
     return (
         <>
@@ -40,16 +47,41 @@ function RelativesPanel({
                                 />{' '}
                                 <ActionButton
                                     icon={Eraser}
-                                    onClickEvent={() => {
-                                        onRemoveUser(username);
-                                    }}
+                                    onClickEvent={toggleModal}
                                 />
+                                {showModal && (
+                                    <Modal onClickClose={toggleModal}>
+                                        <>
+                                            <h2 className="secondary-title">
+                                                Eliminar asistente
+                                            </h2>
+                                            <p
+                                                className={
+                                                    styles[
+                                                        'relatives-panel__modal-text'
+                                                    ]
+                                                }
+                                            >
+                                                ¿Quieres quitar a {name} de la
+                                                lista?
+                                            </p>
+                                            <Button
+                                                text="Confirmar"
+                                                btnStyle="secondary"
+                                                onClickEvent={() => {
+                                                    onRemoveUser(username);
+                                                    toggleModal();
+                                                }}
+                                            />
+                                        </>
+                                    </Modal>
+                                )}
                             </div>
                         </div>
                     ))}
             </section>
             <div className={styles['relatives-panel__add']}>
-                <p>Añadir acompañante</p>
+                <p>Añadir</p>
                 <div className="flex">
                     <ActionButton icon={Person} onClickEvent={onAddNewUser} />
                 </div>

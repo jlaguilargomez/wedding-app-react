@@ -69,12 +69,7 @@ function JoinForm(): JSX.Element {
         <main className={styles['join-form__container']}>
             <section className={cn(styles['join-form__section'])}>
                 <p className={styles['join-form__text']}>
-                    Esto es un simple formulario para que introduzcas los datos
-                    de los que vais a venir a la boda.
-                </p>
-                <p className={styles['join-form__text']}>
-                    Por favor, añade los datos de tantos como seais incluyéndote
-                    a ti mismo.
+                    Añade en el formulario tus datos y los de tus acompañantes.
                 </p>
                 <p className={styles['join-form__text']}>¡Gracias!</p>
                 <RelativesPanel
@@ -127,8 +122,9 @@ function JoinForm(): JSX.Element {
                         labelText="Si quieres añadir algo, ¡este es el sitio!"
                         onTextAreaChange={setAdditionalContent}
                     />
-
-                    <Button type="submit" text="Enviar comentario" />
+                    <div className={styles['join-form__button']}>
+                        <Button type="submit" text="Enviar comentario" />
+                    </div>
                 </form>
             </section>
             {showUserModal && (

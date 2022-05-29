@@ -99,6 +99,8 @@ function RelativeForm({
                     labelText="Nombre"
                     value={relativeFormData.name}
                     onChangeEvent={handleInputChange}
+                    pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*"
+                    errorMessage="Revisa el nobre introducido"
                     required
                 />
                 <CheckBox
@@ -132,6 +134,8 @@ function RelativeForm({
                         value={relativeFormData.allergies}
                         onChangeEvent={handleInputChange}
                         required={showAllergies}
+                        pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*"
+                        errorMessage="Este campo no acepta caracteres raros"
                     />
                 )}
 

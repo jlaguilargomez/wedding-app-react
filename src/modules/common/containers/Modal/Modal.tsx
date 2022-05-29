@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { MutableRefObject, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -30,8 +33,11 @@ const Modal = ({ children, onClickClose }: ModalProps): JSX.Element => {
     }, []);
 
     return createPortal(
-        <div className={styles['modal-layout']}>
-            <aside className={styles.modal}>
+        <div className={styles['modal-layout']} onClick={onClickClose}>
+            <aside
+                className={styles.modal}
+                onClick={(e) => e.stopPropagation()}
+            >
                 <button
                     className={styles.modal__button}
                     type="button"

@@ -31,7 +31,8 @@ function LoginForm(): JSX.Element {
     const { userId } = useParams();
     const navigate = useNavigate();
 
-    const { createUser } = useContext(UserDataContext);
+    const { userData, createUser } = useContext(UserDataContext);
+    console.log(userData);
 
     useEffect(() => {
         if (userId) {

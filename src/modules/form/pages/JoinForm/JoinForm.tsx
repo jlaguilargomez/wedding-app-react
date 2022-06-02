@@ -1,6 +1,5 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 
-import { useUserData } from 'hooks/useUserData/useUserData';
 import Loader from 'modules/common/components/Loader/Loader';
 import Modal from 'modules/common/containers/Modal/Modal';
 
@@ -15,6 +14,7 @@ import TextArea from 'modules/common/components/TextArea/TextArea';
 import Button from 'modules/common/components/Button/Button';
 
 import styles from 'styles/pages/JoinForm.module.scss';
+import { UserDataContext } from 'context/UserData/userData.context';
 
 function JoinForm(): JSX.Element {
     const {
@@ -23,7 +23,7 @@ function JoinForm(): JSX.Element {
         updateTravelData,
         removeRelative,
         updateAdditionalInfo,
-    } = useUserData();
+    } = useContext(UserDataContext);
 
     const [relativeToEdit, setRelativeToEdit] = useState<
         IRelative | undefined

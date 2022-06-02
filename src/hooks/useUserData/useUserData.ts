@@ -186,8 +186,6 @@ export const useUserData = (): IUseUserData => {
     };
 
     useEffect(() => {
-        console.log('Use Data hook');
-        // turn off realtime subscription
         let unsubscribe;
 
         if (user) {

@@ -5,6 +5,7 @@ import { auth, firestore } from 'lib/firebase/firebase.config.js';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IRelativeForm } from 'modules/form/containers/RelativeForm/RelativeForm';
+import { v4 as uuidv4 } from 'uuid';
 
 const defaultUserData: UserData = {
     userName: '',
@@ -81,8 +82,7 @@ export function useUserData(): IUserDataHook {
         if (user && userData) {
             const { relatives } = userData;
 
-            // TODO: utiliza la libreria de random ui
-            const username = String(Math.random());
+            const username = uuidv4();
 
             return firestore
                 .collection('users')

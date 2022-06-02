@@ -9,6 +9,10 @@ import styles from 'styles/components/RelativesPanel.module.scss';
 import Modal from 'modules/common/containers/Modal/Modal';
 import Button from 'modules/common/components/Button/Button';
 
+interface IUserToRemove {
+    name: string;
+    username: string;
+}
 interface RepativesPanelProps {
     relatives: Array<IRelative>;
     onEditUser: (username: string) => void;
@@ -23,6 +27,9 @@ function RelativesPanel({
     onAddNewUser,
 }: RepativesPanelProps): JSX.Element {
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [userToRemove, setUserToRemove] = useState<IUserToRemove | null>(
+        null
+    );
 
     const toggleModal = (): void =>
         setShowModal((prevValue: boolean) => !prevValue);
@@ -47,35 +54,11 @@ function RelativesPanel({
                                 />{' '}
                                 <ActionButton
                                     icon={Eraser}
-                                    onClickEvent={toggleModal}
+                                    onClickEvent={() => {
+                                        setUserToRemove({ name, username });
+                                        toggleModal();
+                                    }}
                                 />
-                                {showModal && (
-                                    <Modal onClickClose={toggleModal}>
-                                        <>
-                                            <h2 className="secondary-title">
-                                                Eliminar asistente
-                                            </h2>
-                                            <p
-                                                className={
-                                                    styles[
-                                                        'relatives-panel__modal-text'
-                                                    ]
-                                                }
-                                            >
-                                                ¿Quieres quitar a {name} de la
-                                                lista?
-                                            </p>
-                                            <Button
-                                                text="Confirmar"
-                                                btnStyle="secondary"
-                                                onClickEvent={() => {
-                                                    onRemoveUser(username);
-                                                    toggleModal();
-                                                }}
-                                            />
-                                        </>
-                                    </Modal>
-                                )}
                             </div>
                         </div>
                     ))}
@@ -86,6 +69,44 @@ function RelativesPanel({
                     <ActionButton icon={Person} onClickEvent={onAddNewUser} />
                 </div>
             </div>
+            {showModal && (
+                <Modal
+                    onClickClose={() => {
+                        toggleModal();
+                        setUserToRemove(null);
+                    }}
+                >
+                    {userToRemove ? (
+                        <>
+                            {' '}
+                            <>
+                                <h2 className="secondary-title">
+                                    Eliminar asistente
+                                </h2>
+                                <p
+                                    className={
+                                        styles['relatives-panel__modal-text']
+                                    }
+                                >
+                                    ¿Quieres quitar a {userToRemove.name} de la
+                                    lista?
+                                </p>
+                                <Button
+                                    text="Confirmar"
+                                    btnStyle="secondary"
+                                    onClickEvent={() => {
+                                        onRemoveUser(userToRemove.username);
+                                        toggleModal();
+                                        setUserToRemove(null);
+                                    }}
+                                />
+                            </>
+                        </>
+                    ) : (
+                        <h2>No hay nadie seleccionado</h2>
+                    )}
+                </Modal>
+            )}
         </>
     );
 }

@@ -7,7 +7,3 @@ export const debounce = (func: (some: any) => void, timeout = 300): any => {
         }, timeout);
     };
 };
-// function saveInput() {
-//     console.log('Saving data');
-// }
-//  const processChange = debounce(() => saveInput());

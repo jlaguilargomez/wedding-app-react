@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
-import { UserData } from 'types/UserData.types';
+import { IUserDataHook, UserData } from 'types/UserData.types';
 import { auth, firestore } from 'lib/firebase/firebase.config.js';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IRelativeForm } from 'modules/form/containers/RelativeForm/RelativeForm';
+import { v4 as uuidv4 } from 'uuid';
 
 const defaultUserData: UserData = {
     userName: '',
@@ -19,21 +20,7 @@ const defaultUserData: UserData = {
     aditionalInfo: '',
 };
 
-interface IUseUserData {
-    userData: UserData | null;
-    loadingUser: boolean;
-    createUser: (
-        userID: string | undefined,
-        userName: string | null | undefined
-    ) => Promise<void>;
-    updateTravelData: (name: string, value: boolean) => Promise<void | null>;
-    updateAdditionalInfo: (newValue: string) => Promise<void | null>;
-    addNewRelative: (relativeInfo: IRelativeForm) => Promise<void | null>;
-    removeRelative: (username: string) => Promise<void | null>;
-    editRelative: (relativeInfo: any) => Promise<void | null>;
-}
-// TODO: Podria crear un hook que se encargue solo de hacer el CRUD de los datos
-export const useUserData = (): IUseUserData => {
+export function useUserData(): IUserDataHook {
     const [user] = useAuthState(auth as any);
 
     const [userData, setUserData] = useState<UserData | null>(null);
@@ -95,10 +82,7 @@ export const useUserData = (): IUseUserData => {
         if (user && userData) {
             const { relatives } = userData;
 
-            console.log(relatives);
-
-            // TODO: utiliza la libreria de random ui
-            const username = String(Math.random());
+            const username = uuidv4();
 
             return firestore
                 .collection('users')
@@ -159,7 +143,6 @@ export const useUserData = (): IUseUserData => {
             });
 
             // TODO: utiliza la libreria de random ui
-
             return firestore.collection('users').doc(user.uid).update({
                 relatives: editedRelatives,
             });
@@ -186,8 +169,6 @@ export const useUserData = (): IUseUserData => {
     };
 
     useEffect(() => {
-        console.log('Use Data hook');
-        // turn off realtime subscription
         let unsubscribe;
 
         if (user) {
@@ -214,4 +195,4 @@ export const useUserData = (): IUseUserData => {
         removeRelative,
         editRelative,
     };
-};
+}

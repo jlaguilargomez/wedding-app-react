@@ -2,18 +2,16 @@
 import Button from 'modules/common/components/Button/Button';
 import CheckBox from 'modules/common/components/CheckBox/CheckBox';
 import Input from 'modules/common/components/Input/Input';
-import { useUserData } from 'hooks/useUserData/useUserData';
 import { IRelative } from 'types/UserData.types';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { UserDataContext } from 'context/UserData/userData.context';
 
 interface RelativeFormProps {
     relativeInfo?: IRelative;
     cleanRelativeData: () => void;
     closeModal: () => void;
 }
-
-// TODO: Quiza estaria mejor en un archivo de tipos
 export interface IRelativeForm {
     name: string;
     child: boolean;
@@ -40,7 +38,7 @@ function RelativeForm({
     const [relativeFormData, setRelativeFormData] =
         useState<IRelativeForm>(defaultFormData);
 
-    const { addNewRelative, editRelative } = useUserData();
+    const { addNewRelative, editRelative } = useContext(UserDataContext);
 
     useEffect(() => {
         if (relativeInfo) {
@@ -49,8 +47,6 @@ function RelativeForm({
             setShowAllergies(!!allergies);
             setRelativeFormData({ name, child, vegetarian, vegan, allergies });
         }
-
-        // TODO: Añadir error si no encuentra usuario
 
         return () => cleanRelativeData();
     }, []);
@@ -99,6 +95,8 @@ function RelativeForm({
                     labelText="Nombre"
                     value={relativeFormData.name}
                     onChangeEvent={handleInputChange}
+                    pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*"
+                    errorMessage="Revisa el nobre introducido"
                     required
                 />
                 <CheckBox
@@ -128,10 +126,12 @@ function RelativeForm({
                 {showAllergies && (
                     <Input
                         name="allergies"
-                        labelText="Introduce tus alergias"
+                        labelText="Introduce las alergias"
                         value={relativeFormData.allergies}
                         onChangeEvent={handleInputChange}
                         required={showAllergies}
+                        pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*"
+                        errorMessage="Este campo no acepta caracteres raros"
                     />
                 )}
 

@@ -1,3 +1,5 @@
+import { IRelativeForm } from 'modules/form/containers/RelativeForm/RelativeForm';
+
 export interface IRaffle {
     isInvolved: boolean;
     luckyNumber?: number;
@@ -25,4 +27,18 @@ export interface UserData {
     isAdmin?: boolean;
     relatives: Array<IRelative>;
     aditionalInfo: string;
+}
+
+export interface IUserDataHook {
+    userData: UserData | null;
+    loadingUser: boolean;
+    createUser: (
+        userID: string | undefined,
+        userName: string | null | undefined
+    ) => Promise<void>;
+    updateTravelData: (name: string, value: boolean) => Promise<void | null>;
+    updateAdditionalInfo: (newValue: string) => Promise<void | null>;
+    addNewRelative: (relativeInfo: IRelativeForm) => Promise<void | null>;
+    removeRelative: (username: string) => Promise<void | null>;
+    editRelative: (relativeInfo: any) => Promise<void | null>;
 }

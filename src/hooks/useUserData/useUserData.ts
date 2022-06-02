@@ -30,13 +30,17 @@ export function useUserData(): IUserDataHook {
         userID: string | undefined,
         userName: string | null | undefined
     ): Promise<void> => {
-        const ref = firestore.doc(`users/${userID}`);
+        const ref = firestore.collection('users').doc(userID);
 
-        const batch = firestore.batch();
+        const docSnapshot = await ref.get();
 
-        batch.set(ref, { ...defaultUserData, userName });
+        const docAlreadyCreated = docSnapshot.exists;
 
-        await batch.commit();
+        if (docAlreadyCreated) {
+            return;
+        }
+
+        ref.set({ ...defaultUserData, userName });
     };
 
     const updateTravelData = async (

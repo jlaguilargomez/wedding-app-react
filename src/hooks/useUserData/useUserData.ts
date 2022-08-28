@@ -13,9 +13,7 @@ const defaultUserData: UserData = {
         onArrive: false,
         onOutward: false,
     },
-    raffle: {
-        isInvolved: false,
-    },
+    clue: '',
     relatives: [],
     aditionalInfo: '',
 };

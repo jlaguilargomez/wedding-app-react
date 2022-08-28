@@ -1,11 +1,5 @@
 import { IRelativeForm } from 'modules/form/containers/RelativeForm/RelativeForm';
 
-export interface IRaffle {
-    isInvolved: boolean;
-    luckyNumber?: number;
-    raffleType?: string;
-}
-
 export interface IByBus {
     onArrive: boolean;
     onOutward: boolean;
@@ -23,7 +17,7 @@ export interface IRelative {
 export interface UserData {
     userName: string;
     byBus: IByBus;
-    raffle: IRaffle;
+    clue?: string;
     isAdmin?: boolean;
     relatives: Array<IRelative>;
     aditionalInfo: string;

@@ -58,3 +58,11 @@ body {
     font-weight: 400;
     font-size: 1.6rem;
 }
+
+.info-text {
+    padding: 1.5rem 0;
+
+    &__highlight {
+        color: var(--light-brown);
+    }
+}

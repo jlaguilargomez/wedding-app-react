@@ -1,24 +1,29 @@
-import ActionButton from 'modules/common/components/NavButton/NavButton';
 import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import Modal from 'modules/common/containers/Modal/Modal';
 import Calendar from 'modules/info/containers/Calendar/Calendar';
 import Contact from 'modules/info/containers/Contact/Contact';
 import Place from 'modules/info/containers/Place/Place';
+import Gift from 'modules/info/containers/Gift/Gift';
 import React, { useState } from 'react';
 
 import styles from 'styles/pages/Info.module.scss';
+import Bus from 'modules/info/containers/Bus/Bus';
 
 enum ModalInfo {
     CONTACT = 'contact',
     PLACE = 'place',
     CALENDAR = 'calendar',
+    GIFT = 'gift',
+    BUS = 'bus',
 }
 
 const modalInfoData = {
     contact: <Contact />,
     place: <Place />,
     calendar: <Calendar />,
+    gift: <Gift />,
+    bus: <Bus />,
 };
 
 function Info(): JSX.Element {
@@ -50,16 +55,20 @@ function Info(): JSX.Element {
             </div>
 
             <Button
-                text="Contacto"
-                onClickEvent={() => openSpecificModal(ModalInfo.CONTACT)}
-            />
-            <Button
-                text="¿Cómo llegar?"
+                text="Cómo llegar en coche"
                 onClickEvent={() => openSpecificModal(ModalInfo.PLACE)}
             />
             <Button
-                text="Añadir al calendario"
-                onClickEvent={() => openSpecificModal(ModalInfo.CALENDAR)}
+                text="Sobre el bus"
+                onClickEvent={() => openSpecificModal(ModalInfo.BUS)}
+            />
+            <Button
+                text="Regalo a los novios"
+                onClickEvent={() => openSpecificModal(ModalInfo.GIFT)}
+            />
+            <Button
+                text="Contacto"
+                onClickEvent={() => openSpecificModal(ModalInfo.CONTACT)}
             />
 
             {showModal && (

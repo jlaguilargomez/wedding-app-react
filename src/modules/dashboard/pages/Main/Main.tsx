@@ -2,7 +2,7 @@ import Button from 'modules/common/components/Button/Button';
 import InfoCard from 'modules/common/components/InfoCard/InfoCard';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UsMain from 'assets/img/us_main.jpg';
+import UsPrewed from 'assets/img/us-prewed.jpg';
 
 import styles from 'styles/pages/Main.module.scss';
 import Modal from 'modules/common/containers/Modal/Modal';
@@ -17,7 +17,7 @@ function Main(): JSX.Element {
 
     return (
         <main className={styles['main-container']}>
-            <img className={styles.main__img} src={UsMain} alt="nosotros" />
+            <img className={styles.main__img} src={UsPrewed} alt="nosotros" />
             <InfoCard>
                 <div>
                     <p>
@@ -31,7 +31,7 @@ function Main(): JSX.Element {
 
             <Button text="Info" onClickEvent={() => navigate('/info')} />
             <Button
-                text="¡Confirmar asistencia!"
+                text="Confirmar asistencia"
                 onClickEvent={() => navigate('/join')}
             />
             <Button text="¡Comparte tus fotos!" onClickEvent={toggleModal} />

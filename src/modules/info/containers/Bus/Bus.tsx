@@ -6,31 +6,31 @@ function Bus(): JSX.Element {
             <h2 className="secondary-title">Info del bus</h2>
             <p className="info-text">
                 Saldrá de <span className="info-text__highlight">Móstoles</span>
-                , junto a la parada de{' '}
+                , en la zona del metro de{' '}
                 <span className="info-text__highlight">
-                    Manuela Malasaña a las 16.30
+                    Manuela Malasaña, junto al Aldi, a las 16.30
                 </span>
-                , y hará una{' '}
+                , y hará una parada en{' '}
                 <span className="info-text__highlight">
-                    parada en la zona de Moncloa (Madrid) a eso de las 17.10
+                    Alcorcón Central a las 16.40
                 </span>{' '}
-                para dejaros sobre las{' '}
+                y otra en{' '}
                 <span className="info-text__highlight">
-                    18.10 en la finca Monteviejo.
+                    Principe Pío (Glorieta de San Vicente) a las 17.00{' '}
                 </span>
+                y de aquí a la finca.
             </p>
             <p className="info-text">
-                A la vuelta,{' '}
+                A la vuelta, partirá de{' '}
                 <span className="info-text__highlight">
-                    partirá de Monteviejo a las 5:15,
+                    Monteviejo a las 5:10 aprox,
                 </span>{' '}
-                ¡después de la fiesta! y recorrerá las{' '}
-                <span className="info-text__highlight">mismas paradas: </span>
-                primero Moncloa y luego Móstoles. Procuraremos que la conducción
-                sea tranquila para que podáis echar una cabezadita...
+                y recorrerá las{' '}
+                <span className="info-text__highlight">mismas paradas </span>.
             </p>
-            <p className="info-text info-text__highlight">
-                Os confirmaremos toda esta info la semana del 5 de septiembre.
+            <p>
+                Procuraremos que la conducción sea tranquila para que podáis
+                echar una cabezadita...
             </p>
         </>
     );

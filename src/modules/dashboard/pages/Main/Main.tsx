@@ -39,10 +39,10 @@ function Main(): JSX.Element {
             </InfoCard>
 
             <Button text="Info" onClickEvent={() => navigate('/info')} />
-            <Button
+            {/* <Button
                 text="Confirmar asistencia"
                 onClickEvent={() => navigate('/join')}
-            />
+            /> */}
             <Button text="¡Comparte tus fotos!" onClickEvent={toggleModal} />
             {/* <Button
                     text="¡Comparte tus fotos!"

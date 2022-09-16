@@ -43,15 +43,13 @@ function Main(): JSX.Element {
                 text="Confirmar asistencia"
                 onClickEvent={() => navigate('/join')}
             /> */}
-            <Button text="¡Comparte tus fotos!" onClickEvent={toggleModal} />
-            {/* <Button
-                    text="¡Comparte tus fotos!"
-                    onClickEvent={() =>
-                        window.open(
-                            'https://photos.app.goo.gl/fK4LxRrcL3xoiMji8'
-                        )
-                    }
-                /> */}
+            {/* <Button text="¡Comparte tus fotos!" onClickEvent={toggleModal} /> */}
+            <Button
+                text="¡Comparte tus fotos!"
+                onClickEvent={() =>
+                    window.open('https://photos.app.goo.gl/fK4LxRrcL3xoiMji8')
+                }
+            />
             {/* <Button text="Sorteo..." /> */}
 
             {showModal && (

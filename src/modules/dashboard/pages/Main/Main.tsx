@@ -22,18 +22,12 @@ function Main(): JSX.Element {
                 <div>
                     <p>
                         <b>¡Muchísimas gracias</b> a todos los que compartísteis
-                        con nosotros un día maravilloso y que{' '}
+                        con nosotros un día maravilloso y muy divertido que{' '}
                         <b>nunca olvidaremos!</b>
                     </p>
                 </div>
             </InfoCard>
 
-            {/* <Button text="Info" onClickEvent={() => navigate('/info')} /> */}
-            {/* <Button
-                text="Confirmar asistencia"
-                onClickEvent={() => navigate('/join')}
-            /> */}
-            <Button text="Fotos profesionales" onClickEvent={toggleModal} />
             <Button
                 text="Fotomatón"
                 onClickEvent={() =>
@@ -46,7 +40,7 @@ function Main(): JSX.Element {
                     window.open('https://photos.app.goo.gl/fK4LxRrcL3xoiMji8')
                 }
             />
-            {/* <Button text="Sorteo..." /> */}
+            <Button text="Fotos profesionales" onClickEvent={toggleModal} />
 
             {showModal && (
                 <Modal onClickClose={toggleModal}>

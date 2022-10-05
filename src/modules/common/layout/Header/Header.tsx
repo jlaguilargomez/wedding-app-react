@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ROUTE_MAPPER: { [key: string]: string } = {
-    '/main': '¡Nos casamos!',
+    '/main': '¡Nos hemos casado!',
     '/join': 'Confirmar asistencia',
     '/info': 'Info del evento',
 };

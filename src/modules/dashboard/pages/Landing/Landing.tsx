@@ -30,7 +30,7 @@ function Landing(): JSX.Element {
                 alt="novios"
             />
             <Button
-                text="¡Vámonos de boda!"
+                text="¡Quiero ver las fotos!"
                 btnStyle="secondary"
                 onClickEvent={() => navigate('/main')}
             />

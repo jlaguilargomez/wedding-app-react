@@ -8,7 +8,7 @@
 
 .main {
     &__img {
-        width: 80%;
+        width: 85%;
 
         @include respond(tablet) {
             width: 50%;

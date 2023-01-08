@@ -46,7 +46,48 @@ function Main(): JSX.Element {
                 <Modal onClickClose={toggleModal}>
                     <>
                         <h2 className="secondary-title">Fotazas</h2>
-                        <p>¡Estas fotos estarán disponibles próximamente!</p>
+                        <p>¡Por fin las fotos buenas!</p>
+                        <p>
+                            Hemos dividido las fotos entre los momentos
+                            destacados de la ceremonia para que puedas ver las
+                            que te interesen
+                        </p>
+                        <Button
+                            text="El novio y la novia"
+                            btnStyle="secondary"
+                            onClickEvent={() =>
+                                window.open(
+                                    'https://photos.app.goo.gl/n31pUjg8oo8577uH8'
+                                )
+                            }
+                        />
+                        <Button
+                            text="Recepción y ceremonia"
+                            btnStyle="secondary"
+                            onClickEvent={() =>
+                                window.open(
+                                    'https://photos.app.goo.gl/iigRDUDuPEkZ49kv9'
+                                )
+                            }
+                        />
+                        <Button
+                            text="Cocktail y convite"
+                            btnStyle="secondary"
+                            onClickEvent={() =>
+                                window.open(
+                                    'https://photos.app.goo.gl/Nf2oeb4NJJrxnSE89'
+                                )
+                            }
+                        />
+                        <Button
+                            text="Baile y discoteca"
+                            btnStyle="secondary"
+                            onClickEvent={() =>
+                                window.open(
+                                    'https://photos.app.goo.gl/pP2GQfP5gNAMtsyp9'
+                                )
+                            }
+                        />
                     </>
                 </Modal>
             )}
